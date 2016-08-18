@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>array 배열</title>
+</head>
+<body>
+<script type="text/javascript">
+	aa = 1; //단순변수
+	aa = new Array();
+	aa[0] = 10;
+	aa[1] = 20;
+	aa[3] = "결과확인:";
+	document.write(aa[0] + aa[1]);
+	document.write(aa[3] + aa[1] + " " + aa[2]);
+	document.write("크기는 " + aa.length);
+
+	m = 0, n = 1, W = 0, x = 1;
+	document.write("<br>" + aa[0] + " " + aa[0.5] + " " + aa[-1]); 
+	document.write("<br>" + aa[m] + " " + aa[n]);
+
+</script>
+<hr>
+<script type="text/javascript">
+	bb = new Array(100, 200, 300); //선언과 동시에 값할당
+	document.write("<br>" + bb[0] + bb[1] + bb[2]);
+	document.write("<br>");
+	for(i = 0; i < bb.length; i++){
+		document.write(bb[i] + " ")
+
+	}
+	document.write("<br>")
+	for(var i in bb){
+		document.write(bb[i] + " ")
+
+	}
+</script>
+<hr>
+<script type="text/javascript">
+	cc = new Array();
+
+	for(k = 0; k < 10; k++){ // for문으로 배열값을 입력
+		cc[k] = k + 1;
+	}
+	document.write(cc[0] + " " + cc[9]);
+	cc[0] = 777 //값수정
+	document.write(cc[0])
+</script>
+<hr>
+<script type="text/javascript">
+	var dd = new Array(3); // 선언과 동시에 크기지정
+	document.write(dd.length);
+	dd[0] = "하나"
+	dd[1] = 1;     // 배열값은 타입에 상관없다
+	dd[2] = true
+	document.write("<br>" + dd[0] + dd[1] + dd[2])
+	dd[3] = "마우스"
+	dd[4] = "모니터" //요소가 늘어나면 크기도 늘어난다
+
+	for(i = 0; i < dd.length; i++)
+		document.write(dd[i])
+</script>
+<hr>
+<script type="text/javascript">
+	ee = [];   //빈배열
+	ee.push(1) //추가
+	ee.push(2)
+	ee.push(3, 4, 5)
+	document.write(dd.length);
+	document.write("<br>" + ee[0] + ee[ee.length - 1]);
+	ee[5] = 6; //추가 또는 수정
+	
+	document.write("<br>")
+	for(i = 0; i < ee.length; i++){
+		document.write(ee[i])
+	}
+	document.write("<br>")
+
+	var animal = ["토끼", "고양이", "닭"] //배열에 문자열
+		for(i = 0; i < animal.length; i++)
+			document.write(animal[i])
+	
+	document.write("<br>")
+
+
+	var output;
+	for(k in document){
+	output += k + "★" + document[k] + "<br>";
+
+	}
+	document.write("<br> document 내의 명령들 : <br>" + output)
+
+</script>
+</body>
+</html>

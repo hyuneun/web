@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+var count = 1;
+
+function c(id){
+	if(id == 1){
+		count = 1;
+	}else if(id == 2){
+		count = 2
+	}
+}
+
+	function gofunc(ele) {
+		if(count == 1){
+		xhr = new XMLHttpRequest();
+		xhr.open("post", "ajax8XML_TEST.jsp", true);
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4) {
+				if (xhr.status == 200) {
+					var datas = xhr.responseXML;
+					var sangpumNode = datas.getElementsByTagName("sawon");
+					var codeNode = datas.getElementsByTagName("code");
+					var sangNode = datas.getElementsByTagName("sang");
+					var suNode = datas.getElementsByTagName("su");
+					var danNode = datas.getElementsByTagName("dan");
+					var genNode = datas.getElementsByTagName("gen");
+					var str = "<table border='1>'";
+					str += "<tr><th>고객명</th><th>고객전화</th><th>직원명</th><th>부서전화</th></tr>"
+
+					for (var i = 0; i < sangpumNode.length; i++) {
+						if(ele == 1){
+						str += "<tr>";
+						str += "<td>" + codeNode[i].childNodes[0].nodeValue
+								+ "</td>";
+						str += "<td>" + sangNode[i].childNodes[0].nodeValue
+								+ "</td>";
+						str += "<td>" + suNode[i].childNodes[0].nodeValue
+								+ "</td>";
+						str += "<td>" + danNode[i].childNodes[0].nodeValue
+								+ "</td>";
+						str += "</tr>";
+						}else if(ele == 2){
+							if(genNode[i].childNodes[0].nodeValue == "남"){
+								str += "<tr>";
+								str += "<td>" + codeNode[i].childNodes[0].nodeValue
+										+ "</td>";
+								str += "<td>" + sangNode[i].childNodes[0].nodeValue
+										+ "</td>";
+								str += "<td>" + suNode[i].childNodes[0].nodeValue
+										+ "</td>";
+								str += "<td>" + danNode[i].childNodes[0].nodeValue
+										+ "</td>";
+								str += "</tr>";
+							}
+							
+						}else if(ele == 3){
+							if(genNode[i].childNodes[0].nodeValue == "여"){
+								str += "<tr>";
+								str += "<td>" + codeNode[i].childNodes[0].nodeValue
+										+ "</td>";
+								str += "<td>" + sangNode[i].childNodes[0].nodeValue
+										+ "</td>";
+								str += "<td>" + suNode[i].childNodes[0].nodeValue
+										+ "</td>";
+								str += "<td>" + danNode[i].childNodes[0].nodeValue
+										+ "</td>";
+								str += "</tr>";
+							}
+							
+						}
+					}
+					str += "</table>";
+					document.getElementById("xml").innerHTML = str;
+				} else {
+					alert(xhr.status);
+				}
+
+			}
+		}
+		xhr.setRequestHeader("Content-Type",
+				"application/x-www-form-urlencoded")
+		xhr.send("buser=" + ele.id);
+
+	}else if(count == 2){
+		xhr = new XMLHttpRequest();
+		xhr.open("get", "ajax8json_TEST.jsp", true);
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4) {
+				if (xhr.status == 200) {
+					var data = xhr.responseText;
+					var parsedata = JSON.parse(data);
+					var str = "<table border='1'><tr><th>고객명</th><th>고객전화</th><th>직원명</th><th>부서전화</th></tr>";
+					
+					for(var i = 0; i < parsedata.sangpums.length; i++) {
+						if(ele == 1){
+							str += "<tr>";
+						str +=  "<td>" + parsedata.sangpums[i].code + "</td>" +
+								"<td>" + parsedata.sangpums[i].sang + "</td>" +
+								"<td>" + parsedata.sangpums[i].su + "</td>" +
+								"<td>" + parsedata.sangpums[i].dan + "</td>"; 
+						str += "</tr>";
+						}else if(ele == 2){
+							if(parsedata.sangpums[i].gen == "남"){
+								str += "<tr>";
+								str +=  "<td>" + parsedata.sangpums[i].code + "</td>" +
+										"<td>" + parsedata.sangpums[i].sang + "</td>" +
+										"<td>" + parsedata.sangpums[i].su + "</td>" +
+										"<td>" + parsedata.sangpums[i].dan + "</td>"; 
+								str += "</tr>"; 
+							}
+						}else if(ele == 3){
+							if(parsedata.sangpums[i].gen == "여"){
+								str += "<tr>";
+								str +=  "<td>" + parsedata.sangpums[i].code + "</td>" +
+										"<td>" + parsedata.sangpums[i].sang + "</td>" +
+										"<td>" + parsedata.sangpums[i].su + "</td>" +
+										"<td>" + parsedata.sangpums[i].dan + "</td>"; 
+								str += "</tr>";
+							}
+						}
+						
+					}
+					str += "</table>";
+					document.getElementById("json").innerHTML = str;
+					
+				}else{
+					alert("실패" + xhr.status);
+				}
+			}
+		}
+		xhr.send(null);
+		
+	}
+	}
+	
+	function clsfunc() {
+		disp = document.getElementById("xml");
+		 for (var i = disp.childNodes.length - 1; i >= 0; i--) {
+			disp.removeChild(disp.childNodes[i]);
+		}
+		 
+		 disp2 = document.getElementById("json");
+		 for (var i = disp2.childNodes.length - 1; i >= 0; i--) {
+				disp2.removeChild(disp2.childNodes[i]);
+			}
+	}
+</script>
+</head>
+<body>
+	<h2>부서별 직원목록</h2>
+	<table>
+		<tr>
+			<td id="전체	" onmouseover="gofunc(1)" onmouseout="clsfunc()">전체&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td id="남자	" onmouseover="gofunc(2)" onmouseout="clsfunc()">남자&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td id="여자" onmouseover="gofunc(3)" onmouseout="clsfunc()">여자</td>
+			<td><input type="radio" name="check" id="rb1" checked="checked" onclick="c('1');">XML</input></td>
+			<td><input type="radio" name="check" id="rb2" onclick="c('2');">JSON</input></td>
+		</tr>
+	</table>
+
+	<span>XML</span>
+	<span style="position: relative; left: 430px">JSON</span>
+
+	<span id="xml" style="position: relative; left: 0px"></span>
+	<span id="json" style="position: relative; left: 430px"></span>
+
+</body>
+</html>

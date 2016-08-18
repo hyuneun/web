@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	a = 10;
+	var b = 20;
+	function func1() {
+		var c = a + b;
+		document.getElementById("show").innerHTML = "<i>기억이 나야한다</i>" + c;
+		//document.getElementById("show").innertext = "<i>기억이 나야한다</i> " + c;
+	}
+	window.onload = function() {
+		//alert("문서시작시에 실행");
+		/* my_btn1 = document.getElementById("btn1"); */
+		/* my_btn1.onclick = function() {
+			document.getElementById("show").innerHTML = "asd223"; */
+			
+		//document.getElementById("btn2").onclick = func1;
+		document.getElementById("btn2").addEventListener("click", func1, false);
+		document.getElementById("hello").addEventListener("click", func2, false);
+		document.getElementById("btn3").addEventListener("click", func3, false);
+		
+		}
+		
+		function func2(){
+			document.getElementById("show2").innerHTML = "zzzzzzzz";
+		}
+		
+		function func3(){
+			var abc = document.getElementById("show3");
+			alert(abc.nodeName + " " + abc.childNodes[0].nodeValue + " " + 
+					abc.firstChild.nodeValue);
+			
+			var ele = document.createElement("i");
+			var str = document.createElement("요소생성");
+			ele.appendChild(str);
+			abc.appendChild(ele);
+		}
+	
+</script>
+</head>
+<body>
+	<!-- <script type="text/javascript">
+		a = "결과";
+		b = 40 + 50;
+		alert(a + b)
+	</script> -->
+	이벤트 처리
+	<p />
+	
+	<!--<input type="button" value="click1" onclick="javascript:alert('sd')">  -->
+	<input type="button" value="click2" id="btn1">
+	<hr>
+	<input type="button" value="click3" id="btn2">
+	<input type="button" value="click4" id="btn3">
+	<span id="hello" style="background-color: yellow;">버튼이외의 요소도 이벤트 장착가능</span>
+	<div id="show">결과출력</div>
+	<div id="show3">결과출력2</div>
+
+</body>
+</html>

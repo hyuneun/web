@@ -1,0 +1,8 @@
+/* css 주석 */
+#sbs{background-color: yellow;
+	color: blue;
+	font-size: 20px;}
+
+	table{width: 70%; margin: 50px;}
+	td{border: 1px solid #00f; border-top: dashed red}
+	input{border: 5px double rgb(255,255,0); background-color: rgb(70%,80%,10%);}

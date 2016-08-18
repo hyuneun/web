@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>form테그</title>
+	<script type="text/javascript">
+		window.onload = function(){
+			document.getElementById('btnsend').onclick = chkData
+			document.getElementById('btnClear').onclick = clsData
+		}
+		
+		function chkData(){
+			//alert("aa")
+			if(frm.name.value === "" || isNaN(frm.name.value) == false)
+			{
+			alert("이름을 입력하시오")
+			frm.name.focus()
+			return
+			}
+
+			//정규 표현식으로 이메일 검사
+			var regExp = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
+			if(!frm.email.value.match(regExp)) 
+			{
+        	alert("이메일을 정확히 입력하시오")
+        	frm.email.focus();
+        	return;
+		
+			}
+
+
+
+			var regAge = /^[0-9]{1,2}$/; //정규표현식 (매우중요) / 로 감싼다
+			if(!frm.age.value.match(regAge))
+			{
+			alert("숫자를 입력하시오")
+			frm.age.focus();
+			return;
+			}
+
+
+
+
+		}
+		
+		function clsData(){
+			//alert("bb")
+			if(frm.id.value.length < 3){
+			alert("3자이상입력")
+			frm.id.focus()
+			return
+			}
+		}
+
+		
+
+
+		
+
+
+
+	</script>
+
+</head>
+<body>
+** 입력양식 **<p>
+<form action="form.jsp" name = "frm" method="get">
+
+이 름 : <input type="text" name="name"></input><br>
+아이디: <input type="text" name="id" placeholder="3자이상"></input><br>
+이메일 : <input type="email" name="email"></input><br>
+나 이 : <input type="text" name="age" maxlength="2"></input><br>
+<input type="button" id="btnsend" value="자료전송"></input>
+<input type="reset" value="내용삭제" id="btnClear"></input>
+
+</form>
+</body>
+</html>

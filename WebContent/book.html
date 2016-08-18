@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	var xhr;
+	window.onload = function() {
+		document.getElementById("btnok").addEventListener("click", startXhr,
+				false);
+	}
+
+	function startXhr() {
+		xhr = new XMLHttpRequest();
+		xhr.open("get", "book.json", true);
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4) {
+				if (xhr.status == 200) {
+					process();
+				}else{
+					alert("실패" + xhr.status);
+				}
+			}
+		}
+		xhr.send(null);
+	}
+	
+	function process(){
+		var data = xhr.responseText;
+		//alert(data)
+		var parsedata = JSON.parse(data);
+		//alert(parsedata.SeoulLibraryTime.row.length);
+		var str = "<table border='1'><tr id='aa'><td>도서관명</td><td>주소</td><td>전화</td></tr>";
+		for (var i = 0; i < parsedata.SeoulLibraryTime.row.length; i++) {
+			str += "<tr>";
+			str += "<td>";
+			str += parsedata.SeoulLibraryTime.row[i].LBRRY_NAME + " "
+			str += "</td>";
+			str += "<td>";
+			str += parsedata.SeoulLibraryTime.row[i].TEL_NO + " "
+			str += "</td>";
+			str += "<td>";
+			str += parsedata.SeoulLibraryTime.row[i].ADRES + "<br>"
+			str += "</td>";
+			str += "</tr>";
+		}
+		str += "</tr></table>";
+		document.getElementById("show").innerHTML = str;
+		
+	}
+</script>
+</head>
+<body>
+	<button id="btnok">ajax처리 json타입</button>
+	<hr>
+	<div id="show"></div>
+</body>
+</html>

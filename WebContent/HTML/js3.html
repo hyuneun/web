@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+<b>js test<br>
+<script type="text/javascript">
+	document.write("br type 확인");
+	document.write(typeof(1), " ", typeof(1.5), " ", typeof("문자열"));
+	document.write(typeof(ture), " ", typeof(null), " ", typeof(undefined));
+
+	document.write("<br><br> ==와 ===의 이해");
+	re1 = 5 == "5"; // 형변환후 비교
+	re2 = 5 === "5"; // 형변환없이 비교
+	document.write("<br>비교결과 :", re1, " ", re2);
+
+	re3 = "c" + "a" + "t" === "cat" //문자열은 순서가 같으면 같은 문자열로 취급
+	//re4 = "cat".toUpperCase(); 문자열을 대문자로 변환 upper 소문자 lower
+	//re4 = "cat".toUpperCase() === "cat"
+	re4 = "cat".toUpperCase() === "CAT"
+	document.write("<br>비교결과2 : ", re3, " ", re4);
+	kbs = 1; // 대소문자 구분
+	kBs = 2;
+	kbS = kBs + kbs
+	document.write("<br>", kbS)
+
+</script>
+</body>
+</html>

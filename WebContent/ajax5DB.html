@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>상품자료</title>
+<script type="text/javascript">
+	var xhr;
+//	var cnt = 0;
+	function c(id){
+		if(id == "1"){
+			startXhr(1);
+		}else if(id == "2"){
+			startXhr(2);
+		}else if(id == "3"){
+			startXhr(3);
+		}
+	}
+	
+function startXhr(id){
+	xhr = new XMLHttpRequest();
+	xhr.open("get","testxml.jsp",true);
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState == 4){
+			if(xhr.status == 200){
+				if(id == 1){
+				process(1);
+				}else if(id == 2){
+				process(2);
+				}else if(id == 3){
+				process(3);
+				}
+			}else{
+				alert(xhr.status);
+			}
+			
+		}
+		
+		
+		
+	}
+	xhr.send(null);
+}
+function process(id){
+	var count = 0;
+	var data = xhr.responseXML;
+	//alert(data);
+	var sangpumNode = data.getElementsByTagName("sangpum");
+	var codeNode = data.getElementsByTagName("code");
+	var sangNode = data.getElementsByTagName("sang");
+	var suNode = data.getElementsByTagName("su");
+	var danNode = data.getElementsByTagName("dan");
+	var genNode = data.getElementsByTagName("gen");
+	
+	var str = "<table border='1>'";
+	str += "<tr><th>사번</th><th>이름</th><th>직급</th><th>입사년</th></tr>"
+	if(id == 1){
+	for (var i = 0; i < sangpumNode.length; i++) {
+		str += "<tr>";
+		str += "<td>" + codeNode[i].childNodes[0].nodeValue + "</td>";
+		str += "<td>" + sangNode[i].childNodes[0].nodeValue + "</td>";
+		str += "<td>" + suNode[i].childNodes[0].nodeValue + "</td>";
+		str += "<td>" + danNode[i].childNodes[0].nodeValue + "</td>";
+		str += "</tr>";
+		count++;
+	}
+	str += "</table><br> 직원수 : " + count;
+	document.getElementById("disp").innerHTML = str;
+	}else if(id == 2){
+		for (var i = 0; i < sangpumNode.length; i++) {
+			if(genNode[i].childNodes[0].nodeValue == "남"){
+			str += "<tr>";
+			str += "<td>" + codeNode[i].childNodes[0].nodeValue + "</td>";
+			str += "<td>" + sangNode[i].childNodes[0].nodeValue + "</td>";
+			str += "<td>" + suNode[i].childNodes[0].nodeValue + "</td>";
+			str += "<td>" + danNode[i].childNodes[0].nodeValue + "</td>";
+			str += "</tr>";
+			count++;
+		}
+		}
+		str += "</table><br> 직원수 : " + count;
+		document.getElementById("disp").innerHTML = str;
+		
+	}else if(id == 3){
+		for (var i = 0; i < sangpumNode.length; i++) {
+			if(genNode[i].childNodes[0].nodeValue == "여"){
+			str += "<tr>";
+			str += "<td>" + codeNode[i].childNodes[0].nodeValue + "</td>";
+			str += "<td>" + sangNode[i].childNodes[0].nodeValue + "</td>";
+			str += "<td>" + suNode[i].childNodes[0].nodeValue + "</td>";
+			str += "<td>" + danNode[i].childNodes[0].nodeValue + "</td>";
+			str += "</tr>";
+			count++;
+		}
+		}
+		str += "</table><br> 직원수 : " + count;
+		document.getElementById("disp").innerHTML = str;
+	}
+}
+
+</script>
+</head>
+<body>
+직원자료보기</p>
+<input type="radio" name="check" id="c1" onclick="c('1');">전체</input>
+<input type="radio" name="check" id="c2" onclick="c('2');">남</input>
+<input type="radio" name="check" id="c3" onclick="c('3');">여</input>
+<div id="disp"></div>
+
+
+</body>
+</html>

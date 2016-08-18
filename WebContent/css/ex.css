@@ -1,0 +1,8 @@
+@CHARSET "UTF-8";
+i ,b{
+	font-weight: bold;
+	color: yellow;
+	font-size: 80px;
+	font-style: inherit;
+	font-stretch: ultra-condensed;
+}

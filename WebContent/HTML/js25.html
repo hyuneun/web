@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript">
+		function func1(){
+			var tag1 = "이름 : <input type='text' name='irum' />"
+			var tag2 = "이름 : <input type='text' name='nai' />"
+
+			document.getElementById('test1').innerHTML = tag1
+			document.getElementById('test2').innerHTML = tag2
+		}
+		function func2(){
+
+
+		}
+
+	</script>
+</head>
+<body>
+** 프로그램 진행도중 태그 및 자료 변경 **<p>
+<a href="http://naver.com">네이버</a><br>
+
+<div id="test1">inner은 현재 화면자료를 수정</div>
+<div id="test2">ㅎㅇ</div>
+
+<input type="button" value="처리1" onclick="func1()"></input>
+<input type="button" value="처리2" onclick="func2()"></input>
+
+</body>
+</html>

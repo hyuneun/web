@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		.tab{
+			text-align: center
+		}
+
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			document.getElementById('sel').onchange = function(){
+				su1 = Number(frm.sel.options[frm.sel.selectedIndex].value)
+				su3 = (frm.sel.options[frm.sel.selectedIndex].text)
+				st2 = ""
+					if(su3 === "선택")
+						return
+					else{
+					addRow(su3)
+					for(s = 2; s <= 9; s++){
+						st2 = su1 + " * " + s + " = " + su1 * s + " "
+						su2 = st2
+						addRow(st2)
+						}
+						document.getElementById("myTable").setAttribute('border', '1')
+				
+						}
+					}
+				}
+			function addRow(st2){  //table에 tr(행)을 추가
+			var row = document.createElement('tr')
+			var col = addCol(st2) //col = <td>볼펜</td>
+			row.appendChild(col);
+			
+			document.getElementById('myTable').appendChild(row);
+			}
+			
+			function addCol(data){
+			var col = document.createElement('td');
+			var txt = document.createTextNode(data);
+			col.appendChild(txt);
+			return col;
+			}
+
+
+			function addRow(su3){  //table에 tr(행)을 추가
+			var row = document.createElement('tr')
+			var col = addCol(su3) //col = <td>볼펜</td>
+			row.appendChild(col);
+		
+			document.getElementById('myTable').appendChild(row);
+			}
+//--------------------클리어
+		function cle(){
+			//alert("cle")
+			re = document.getElementById("myTable")
+			while(re.hasChildNodes()){
+			re.removeChild(re.childNodes[0])
+		}
+		}
+
+	</script>
+</head>
+<body>
+<h2>구구단출력</h2>
+
+<form name="frm">
+	단 :
+	
+	<select name="sel" id="sel">
+		<option value="">선택</option>
+		
+		<option value="2">2단</option>
+		
+		<option value="3">3단</option>
+		
+		<option value="4">4단</option>
+		
+		<option value="5">5단</option>
+		
+		<option value="6">6단</option>
+		
+		<option value="7">7단</option>
+		
+		<option value="8">8단</option>
+		
+		<option value="9">9단</option>
+	</select>
+	<input type="button" value="삭제" onclick="cle()">
+	</form>
+	<div id="disp">구구단</div>
+
+	<table id="myTable" class="tab">
+	<tbody id="myTable"></tbody>
+	</table>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript">
+		addImages = [
+			"http://static.checkout.naver.net/cnsv/iu/home/16/0513/kpu9xa1f6ph.jpg", "http://static.checkout.naver.net/cnsv/iu/home/16/0513/6t8s7iiuzpr.jpg", "http://static.checkout.naver.net/cnsv/iu/home/16/0513/kpu9xa1f6ph.jpg"
+
+		]
+
+		window.onload = function(){
+			rotate()
+
+		}
+		
+		count = 0;
+		imgCount = addImages.length
+
+		function rotate(){
+			//alert(document.images)
+			if(document.images){
+				count++
+				if(count == imgCount){
+					count = 0
+				}
+				document.addBanner.src = addImages[count]
+				setTimeout("rotate()", 2000); //2초마다 rotate호출
+			}
+		}
+	</script>
+</head>
+<body>
+<h1>이미지 전환</h1>
+<img src="" name="addBanner">
+</body>
+</html>

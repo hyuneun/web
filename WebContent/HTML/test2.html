@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript">
+		window.onload = function(){
+			document.getElementById('btn1').onclick = calc
+		
+		}
+
+		function calc(){
+
+
+			var regAge = /^[가-힣]$/;
+			if(!frm.su1.value.match(regAge))
+			{
+			alert("한글을 입력하시오")
+			frm.su1.focus();
+			return;
+			}
+			
+			var regAge = /^[0-9]/; //숫자만입력받음
+			if(!frm.su2.value.match(regAge))
+			{
+			alert("숫자를 입력하시오")
+			frm.su2.focus();
+			return;
+			}	
+		
+			if(frm.sel.value == "m")	{
+				var su3 = frm.su2.value - frm.su2.value % 10;
+				var su4 = frm.sel.value = "남자"
+				document.getElementById("show").innerHTML = '<img src = "image/nam.jpg">' 
+				document.getElementById("show2").innerHTML = (frm.su1.value + " 님은 " + su3 + "대 " + su4)
+					}
+			
+			else{	
+				var su3 = frm.su2.value - frm.su2.value % 10;
+				var su4 = frm.sel.value = "여자"
+				document.getElementById("show").innerHTML = '<img src = "image/wo.jpg">'
+				document.getElementById("show2").innerHTML = (frm.su1.value + " 님은 " + su3 + "대 " + su4)
+				}
+}
+
+	</script>
+</head>
+<body>
+
+<form action="form.jsp" name = "frm" method="get">
+이름 : <input type="text" name="su1" placeholder="이름입력"></input><br>
+나이 : <input type="text" name="su2" placeholder="나이입력"></input><br>
+성별 : 
+
+<select name="sel">
+<option value="m">남자</option>	
+<option value="w">여자</option>
+</select>
+
+<div id="show">결과 : </div>
+<div id="show2"></div>
+<input type="button" id="btn1" value="확인">
+<input type="reset" id="btn2" value="취소">
+</form>
+
+</body>
+</html>

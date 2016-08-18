@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>함수</title>
+<script type="text/javascript">
+	var count = 0;
+	
+	function aa(){
+	count += 1;
+	return; // 함수의 무조건 탈출
+	document.write(count + " 번 수행")
+}
+	function bb(){
+		cc(10);		//함수는 함수호출이 가능하다
+		var result = dd(3, 4);
+		document.write("<br>반환값 : " + result);
+	}
+
+	function cc(arg){  //함수명(parameter....) , 인수 , 인자 , argment
+		document.write("<br>cc 함수수행")
+		document.write("<br> arg:" + arg)
+		var kk = arg + 10;
+		document.write("<br>kk : " + kk)
+	}
+	
+	function dd(a, b){
+		document.write("<br> a : " + a + "b : " + b)
+		return a + b //함수수행후 결과값을 반환
+	}
+</script>
+
+</head>
+<body>
+함수작성<br>
+<script type="text/javascript">
+	aa();
+	aa();
+	bb();
+
+</script>
+<hr>
+<script type="text/javascript">
+	bb()
+
+
+</script>
+</body>
+</html>

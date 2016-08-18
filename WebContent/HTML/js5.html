@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>조건판단문</title>
+	<style type="text/css">
+	</style>
+</head>
+<body>
+switch test(else if문 대신 쓸수있다)<br>
+<script type="text/javascript">
+	var a = 3;
+	if(a % 2 == 0){
+		document.write("짝수");
+	}
+	else{
+		document.write("홀수");
+	}
+		document.write("<br>");
+	switch(a % 2){
+		case 0:
+			document.write("짝수");
+			break;
+		case 1:
+			document.write("홀스");
+			break;
+}
+		document.write("<br>");
+		//var hak = prompt("학점입력");
+		//document.write("<br>", hak.toUpperCase());
+		hak = "A";
+		var hak2 = hak.toUpperCase();
+		if(hak2 === "A")
+			document.write("<br>매우우수")
+		else if(hak2 === "B")
+			document.write("<br>우수")
+		else if(hak2 === "C")
+			document.write("<br>보통")
+		else if(hak2 === "D")
+			document.write("<br>저조")
+		else
+			document.write("<br>불량")
+
+		document.write("<br>")
+		switch(hak2){
+			case "A":
+				document.write("<br>매우우수")
+				break;
+			case "B":
+				document.write("<br>우수")
+				break;
+			case "C":
+				document.write("<br>보통")
+				break;
+			case "D":
+				document.write("<br>저조")
+				break;
+			default:
+				document.write("<br>불량")
+				break;
+			}
+		document.write("<br>")
+		switch(hak2){
+			case "A":
+			case "B":
+			case "C":
+				document.write("<br>good!");
+				break;
+			case "D":
+				document.write("<br>bad");
+				break;
+			default:
+				document.write("<br>정확히입력");
+				break;
+		}		
+</script>
+<hr>
+<script type="text/javascript">
+	dt = new Date();
+	var month = dt.getMonth() + 1;	
+	var day = dt.getDate();
+	var year = dt.getFullYear();
+	document.write("날짜및 시간 : ", month + "-" + day + "-" + year);
+	document.write("<br>요일 : ", dt.getDay());
+	//문제)스위치를 사용
+document.write("<br>")
+	var y = dt.getDay();
+	switch(y){
+	case 0:
+	document.write("일요일");
+	break;
+	case 1:
+	document.write("월요일");
+	break;
+	case 2:
+	document.write("화요일");
+	break;
+	case 3:
+	document.write("수요일");
+	break;
+	case 4:
+	document.write("목요일");
+	break;
+	case 5:
+	document.write("금요일");
+	break;
+	case 6:
+	document.write("토요일");
+	break;
+}
+switch(y){
+	case 0:
+	case 6:
+	document.write("휴일")
+	break;
+	case 1:
+	case 2:
+	case 3:
+	case 4:
+	case 5:
+	document.write("평일")
+	break;
+}
+	for (var i = Things.length - 1; i >= 0; i--) {
+		Things[i]
+	}
+
+
+
+
+</script>
+</body>
+</html>

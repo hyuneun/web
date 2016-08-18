@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>event</title>
+	<script type="text/javascript">
+		function func(){
+			alert("성공")
+
+		}
+		function func2(){
+			var data = prompt("날자입력", "2016-5-16")
+
+			alert(data)
+		}
+
+
+
+
+	</script>
+</head>
+<body>
+이벤트(일반사용자가 뭔가를 기대하며 사건을 발생)<p>
+<button>이벤트 처리용</button>
+<a href="http://naver.com">네이버</a><br>
+<a href="javascript:func()">이벤트</a><br>
+<a href="javascript:" onclick="func2()">이벤트2</a><br>
+<button onclick="func2()">이벤트3</button>
+<input type="button" onclick="func2()" value="이벤트 처리4"></input>
+</body>
+</html>

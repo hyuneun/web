@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript">
+		a = 10;   // 전역변수 global variable
+		var b = 20;// 전역변수
+
+		function func1(){
+			var c = 30 // 함수안에서 var로 값선언 - 지역변수(함수안에서만 통용된다)프로그램은 지역변수로짜야한다
+			d = 40;	   //전역변수
+			document.write("<br>a :" + a +", b: " + b)
+			document.write("<br>a :" + c +", b: " + d)
+		}
+
+		function func2(){
+			document.write("<br>a: " + a +", b: " + b)
+			//document.write("<br>a: " + c +", b: " + d) <- c 때문에 에러가 난다(c가 지역변수이기 때문에)
+			//document.write("<br>e: " + ", f: " + f) // (에러) 변수선언후 사용해야함
+			{
+				e = 50;
+				var f = 60;
+				document.write("<br>e: " + f + ", f: " + f)
+			}
+		}
+
+
+
+	</script>
+</head>
+<body>
+전역, 지역변수의 이해<br>
+<script type="text/javascript">
+	func1();
+	func2();
+
+	document.write("<br>a: " + a +", b: " + b)
+</script>
+</body>
+</html>

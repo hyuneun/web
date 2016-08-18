@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>test5</title>
+	<style type="text/css">
+	td {text-align: center;}
+	#pic{
+		position: absolute;
+		left: 600px;
+		right: 0px;
+		top: 250px;
+	}
+	#bt1{
+		position: absolute;
+		left: -900px;
+		right: 0px;
+		top: 440px;
+	}
+	#bt2{
+		position: absolute;
+		left: 900px;
+		right: 0px;
+		top: 440px;
+	}
+	#home{
+		position: absolute;
+		left: 0px;
+		right: 0px;
+		top: 800px;
+	}
+	</style>
+
+	<script type="text/javascript">
+		var myPic = new Array("1.bmp", "2.jpg", "3.jpg", "4.jpg", "5.bmp")
+			var thisPic = 0
+		
+		function processPrev(){
+			if(thisPic > 0){
+			thisPic--
+			//console.log(document.mypicture.src)
+			document.mypicture.src = myPic[thisPic]
+		}
+		}
+		
+		function processNext(){
+			if(thisPic < 4) {
+
+			thisPic++
+			//console.log(document.mypicture.src)
+			document.mypicture.src = myPic[thisPic]
+			}
+		}
+
+
+	</script>
+
+</head>
+<body bgcolor="FAFAD2">
+
+<table>
+	<tr>
+		<td width="700" height="700" id="pic">
+		<img src="1.bmp" name="mypicture" width="100%">
+
+
+		</td>
+
+
+	</tr>
+	<tr>
+		<td>
+			<a href="javascript:processPrev()" id="bt1"><img src="6.jpg" width="100"></a>
+			<a href="javascript:processNext()" id="bt2"><img src="7.jpg" width="100"></a>
+			<a href="test4.html" id="home">홈페이지로 돌아가기</a>
+		</td>
+
+
+	</tr>
+
+
+
+</table>
+</body>
+</html>

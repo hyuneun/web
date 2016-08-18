@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		section ul li {
+			list-style: none; float: left;
+		}	
+		img{
+			width: 300px;	padding-left: 10px; border: 0px;
+		}
+	</style>
+	<script type="text/javascript">
+		var canvas=context=image="";
+		window.onload = function(){
+			canvas = document.getElementById('my')
+			context = canvas.getContext("2d")
+			image = new Image()
+			image.src = "9.jpg"
+			image.onload = function(){
+				context.drawImage(image, 100, 0, 300, canvas.height);
+		}
+		
+		var img1attr = document.getElementById("img1").getAttribute("src")
+		document.getElementById("img1").onclick = function(){
+				changeImage(img1attr)
+		
+		}	
+		
+		var img2attr = document.getElementById("img2").getAttribute("src")
+		document.getElementById("img2").onclick = function(){
+				changeImage(img2attr)
+		}
+		
+		var img3attr = document.getElementById("img3").getAttribute("src");
+		document.getElementById("img3").onclick = function(){
+				changeImage(img3attr)
+		}
+		}
+		function changeImage(imgsrc){
+			image.src = imgsrc
+			context.drawImage(image, 100, 0, 300, canvas.height);
+		}
+		
+		
+	</script>
+</head>
+<body>
+캔버스에이미지담기<p>
+<canvas id="my" width="500" height="300" style="border:5px solid #c3c3c3"></canvas>
+<section>
+	<ul>
+		<li><img src="4.jpg" id="img1"></li>
+		<li><img src="2.jpg" id="img2"></li>
+		<li><img src="3.jpg" id="img3"></li>
+	</ul>
+</section>
+</body>
+</html>

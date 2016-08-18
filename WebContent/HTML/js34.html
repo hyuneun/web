@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>달력</title>
+	<script type="text/javascript">
+	window.onload = function(){
+		document.getElementById("btnShow").addEventListener("click", func, false);
+		document.getElementById('btnPyear').onclick = func1;
+		document.getElementById('btnPmonth').onclick = func2;
+		document.getElementById('btnNmonth').onclick = func3;
+		document.getElementById('btnNyear').onclick = func4;
+	}
+		var now = new Date();
+		var year = now.getFullYear();
+		var month = now.getMonth();
+		var day = now.getDate();
+
+
+		function makeCal(yoil, nalsu, year, month, day){
+		str = "<table>";
+		str += "<tr><th colspan='7' width='300'>" + year + "년 " + month + "월</th></tr>";
+		var week = new Array("일","월","화","수","목","금","토");
+		for(var i = 0; i < week.length; i++){
+			str += "<th>" + week[i] + "</th>";
+		}
+
+		//날 수 채우기
+		var no = 1;
+		var currentCell = 0;
+		//현재 달은 몇 주?
+		var ju = Math.ceil((nalsu + yoil) / 7);
+		//alert("몇 주?" + ju);
+		for(var r = 0; r <= ju; r++){
+			str += "<tr style='text-align:center'>";
+			for(var col = 1; col <= 7; col++){
+				if(no > nalsu) break;  //날 수 만큼 숫자 증가
+				if(currentCell < yoil) {
+					//예:첫주에 1일이 화요일이면 일월은 공백 처리
+					str += "<td>&nbsp;</td>"
+					currentCell++;
+				}else{
+					if(no === day){  //오늘은 파란색으로 표시
+						str += "<td style='color:blue'>" + no + "</td>";
+					}else{
+						str += "<td>" + no + "</td>";
+					}
+					no++;
+				}
+				
+			}
+			str += "</tr>";
+		}
+		str += "</table>";
+	}
+
+
+
+
+
+
+
+
+
+	function func(){
+		//현재달ffffffffffffffffffffffffffffffffffffffffffffff
+
+		//alert(year + " " + (month + 1) + " " + day);
+
+		//해당 달의 1일은 무슨 요일?
+		var setDate = new Date(year, month, 1);
+		
+		var firstDay = setDate.getDate();
+		//alert(firstDay);
+		var yoil = setDate.getDay();
+		//alert(yoil);
+
+		//해당 달의 날 수 구하기
+		var nalsu = new Array(31,28,31,30,31,30,31,31,30,31,30,31);
+
+		//윤년 체크
+		if(year % 4 === 0 && year % 100 !== 0 || year % 400 === 0){
+			nalsu[1] = 29;
+		}
+		
+		makeCal(yoil, nalsu[month], year, month + 1, day);
+		document.getElementById("disp").innerHTML = str;
+		document.getElementById("etc").style.display = ""; //버튼보이게함
+	}
+//fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+		function func1(){
+		//이전년ffffffffffffffffffffffffffffffffffffffffffffff
+
+		//alert(year + " " + (month + 1) + " " + day);
+
+		//해당 달의 1일은 무슨 요일?
+		var setDate = new Date(year, month, 1);
+		var firstDay = setDate.getDate();
+		//alert(firstDay);
+		var yoil = setDate.getDay();
+		//alert(yoil);
+
+		//해당 달의 날 수 구하기
+		var nalsu = new Array(31,28,31,30,31,30,31,31,30,31,30,31);
+
+		//윤년 체크
+		if(year % 4 === 0 && year % 100 !== 0 || year % 400 === 0){
+			nalsu[1] = 29;
+		}
+		if(true)
+			year -= 1
+		
+		makeCal(yoil, nalsu[month], year, month + 1, day);
+		document.getElementById("disp").innerHTML = str;
+		document.getElementById("etc").style.display = ""; //버튼보이게함
+	}
+//fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+		function func2(){
+		//이전월ffffffffffffffffffffffffffffffffffffffffffffff
+
+		//alert(year + " " + (month + 1) + " " + day);
+
+		//해당 달의 1일은 무슨 요일?
+		var setDate = new Date(year, month, 1);
+		var firstDay = setDate.getDate();
+		//alert(firstDay);
+		var yoil = setDate.getDay();
+		//alert(yoil);
+
+		//해당 달의 날 수 구하기
+		var nalsu = new Array(31,28,31,30,31,30,31,31,30,31,30,31);
+
+		//윤년 체크
+		if(year % 4 === 0 && year % 100 !== 0 || year % 400 === 0){
+			nalsu[1] = 29;
+		}
+		
+		makeCal(yoil, nalsu[month], year, month + 1, day);
+		if(true){
+			month--
+			}if(month < 0){
+			month = 11
+			year--
+		}
+		document.getElementById("disp").innerHTML = str;
+		document.getElementById("etc").style.display = ""; //버튼보이게함
+	}
+//fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+		function func3(){
+		//다음월ffffffffffffffffffffffffffffffffffffffffffffff
+
+		//alert(year + " " + (month + 1) + " " + day);
+
+		//해당 달의 1일은 무슨 요일?
+		var setDate = new Date(year, month, 1);
+		var firstDay = setDate.getDate();
+		//alert(firstDay);
+		var yoil = setDate.getDay();
+		//alert(yoil);
+
+		//해당 달의 날 수 구하기
+		var nalsu = new Array(31,28,31,30,31,30,31,31,30,31,30,31);
+
+		//윤년 체크
+		if(year % 4 === 0 && year % 100 !== 0 || year % 400 === 0){
+			nalsu[1] = 29;
+		}
+
+		makeCal(yoil, nalsu[month], year ,(month + 1), day);
+		if(true)
+			month += 1
+			if(month == 12){
+				month = 0
+				year += 1
+			}
+		document.getElementById("disp").innerHTML = str;
+		document.getElementById("etc").style.display = ""; //버튼보이게함
+	}
+//fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffvar str = "";
+		function func4(){
+		//다음년ffffffffffffffffffffffffffffffffffffffffffffff
+
+		//alert(year + " " + (month + 1) + " " + day);
+
+		//해당 달의 1일은 무슨 요일?
+		var setDate = new Date(year, month, 1);
+		var firstDay = setDate.getDate();
+		//alert(firstDay);
+		var yoil = setDate.getDay();
+		//alert(yoil);
+
+		//해당 달의 날 수 구하기
+		var nalsu = new Array(31,28,31,30,31,30,31,31,30,31,30,31);
+
+		//윤년 체크
+		if(year % 4 === 0 && year % 100 !== 0 || year % 400 === 0){
+			nalsu[1] = 29;
+		}
+		if(true)
+			year += 1
+		makeCal(yoil, nalsu[month], year++, month + 1, day);
+		document.getElementById("disp").innerHTML = str;
+		document.getElementById("etc").style.display = ""; //버튼보이게함
+	}
+//fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+	
+
+
+	
+	</script>
+</head>
+<body>
+달력 만들기<p>
+<input type="button" value="달력 보기" id="btnShow"></input>
+<br><br>
+<div id="disp"></div>
+<div id="etc" style="display:none">
+	<button id="btnPyear">이전 년</button>
+	<button id="btnPmonth">이전 월</button>
+	<button id="btnNmonth">다음 월</button>
+	<button id="btnNyear">다음 년</button>
+
+
+
+
+</div>
+</body>
+</html>

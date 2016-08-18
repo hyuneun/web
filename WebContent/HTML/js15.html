@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript">
+		function f1(){
+			document.write("안녕");
+		}
+		function f2(f){ //인자로 함수전달
+			f()
+		}
+
+		function f3(){
+			return f1; //함수를반환
+
+		}
+
+		function hi(){ //실인수로 함수를 전달할수있다(일급함수)
+			f2(f1);
+			document.write("<br>------------------------<br>")
+			sbs = f3()
+			sbs()  //f1()과 같은 값을 가진다
+			document.write("<br>------------------------<br>")
+			f3()(); //f1()과 같은 값을 가진다
+		}
+	</script>
+
+
+</head>
+<body>
+일급함수지원<br>
+<script type="text/javascript">
+	/*
+	kbs = hi; //함수를 치환
+	kbs();	//hi와 동일
+	mbc = hi(); //리턴값기억
+	mbs();
+	*/
+	hi()
+</script>
+
+</body>
+</html>

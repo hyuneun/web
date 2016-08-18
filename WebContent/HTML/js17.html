@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript">
+		function func1(){
+			document.write("func1")
+
+		}
+		function func2(a, b){
+			var c = a + b;
+			return c;
+		}
+
+		function func3(){ // arguments는 인자가 선언되지 않은경우 사용가능
+			document.write("<br> arguments 갯수 : " + arguments.length);
+			document.write("<br> arguments 값 : " + arguments[0] + " " + arguments[1]);
+		}
+
+		function hap(){
+			var tot = 0
+			for(var i = 0; i < arguments.length; i++){
+				tot += arguments[i]
+			}
+				return tot;
+		}
+
+		function evenOdd(num){
+			var result = "";
+			if(num % 2 === 0)
+				result = "짝"
+			else
+				result = "홀"
+			return result
+		}
+
+
+
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+	func1();
+	document.write("<br>")
+	my = func1
+	my();
+	document.write(my)
+	document.write("<hr>")
+	
+	var re = func2(10, 20); //수행결과를 re가 저장
+	document.write("<br>re : " + re)
+	re = func2("금", "요일");
+	document.write("<br>re : " + re)
+
+	document.write("<hr>")
+	func3();
+
+	document.write("<hr>");
+	document.write(hap(1, 2, 3));
+	document.write(hap("안녕", "반가워"));
+
+	document.write("<hr>");
+	document.write("<br>" + evenOdd(1));
+	var ss = evenOdd(2);
+	document.write("<br>" + ss)
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

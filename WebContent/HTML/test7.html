@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+	image2{
+			width: 100px;	height: 100px; transform: rotate(90deg);
+		}
+	</style>
+
+	<script type="text/javascript">
+	var canvas=context=image="";
+	point = 0;
+	count = 0;
+
+	
+			window.onload = function(){
+			canvas = document.getElementById('my')
+			context = canvas.getContext("2d")
+			image = new Image()
+			image2 = new Array("a1.png", "a2.png", "a3.png", "a4.png", "a5.png", "a6.png", "a7.png")
+			
+						move = document.getElementById('btn2').onclick = function(){ 
+						if(count <= 1 || count == 8 || count == 15 || count == 22 || count == 29){
+						image = new Image()
+						image.src = "a1.png"
+						image.onload = function(){
+						context.clearRect(0, 0, canvas.width, canvas.height);
+						context.drawImage(image, point, 200, 100, 100);
+						}
+						count++
+						point += 30;
+						
+						
+						}
+						else if(count == 2 || count == 9 || count == 16 || count == 23 || count == 30){
+						image = new Image()
+						image.src = "a2.png"
+						image.onload = function(){
+						
+						context.clearRect(0, 0, canvas.width, canvas.height);
+						context.drawImage(image, point, 200, 100, 100);
+						}
+						count++
+						point += 30;
+						
+						}
+						
+						else if(count == 3 || count == 10 || count == 17 || count == 24 || count == 31){
+						image = new Image()
+						image.src = "a3.png"
+						image.onload = function(){
+						context.clearRect(0, 0, canvas.width, canvas.height);
+						context.drawImage(image, point, 150, 100, 100);
+						}
+						count++
+						point += 30;
+						
+						}
+						
+						else if(count == 4 || count == 11 || count == 18 || count == 25 || count == 32){
+						image = new Image()
+						image.src = "a4.png"
+						image.onload = function(){
+						context.clearRect(0, 0, canvas.width, canvas.height);
+						context.drawImage(image, point, 200, 100, 100);
+						}
+						count++
+						point += 30;
+						
+						}
+
+						else if(count == 5 || count == 12 || count == 19 || count == 26 || count == 33){
+						image = new Image()
+						image.src = "a5.png"
+						image.onload = function(){
+						context.clearRect(0, 0, canvas.width, canvas.height);
+						context.drawImage(image, point, 200, 100, 100);
+						}
+						count++
+						point += 30;
+						
+						}
+
+						else if(count == 6 || count == 13 || count == 20 || count == 27){
+						image = new Image()
+						image.src = "a6.png"
+						image.onload = function(){
+						context.clearRect(0, 0, canvas.width, canvas.height);
+						context.drawImage(image, point, 200, 100, 100);
+						}
+						count++
+						point += 30;
+						
+						}	
+
+						else if(count == 7 || count == 14 || count == 21 || count == 28){
+						image = new Image()
+						image.src = "a7.png"
+						image.onload = function(){
+						context.clearRect(0, 0, canvas.width, canvas.height);
+						context.drawImage(image, point, 200, 100, 100);
+						}
+						count++
+						point += 30;
+						
+						}
+
+						else if(count >= 34){
+							count = 0;
+							point = 0;
+
+						}
+
+						sbs = setTimeout("move()", 100);
+		
+						}
+						document.getElementById('btn3').onclick = function(){
+						clearTimeout(sbs)
+						}
+					}
+	</script>
+</head>
+<body>
+<input type="button" value="이동2" id="btn2"></input>
+<input type="button" value="멈춤" id="btn3"></input>
+</p>
+<canvas id="my" width="1000" height="300" style="background-image: url('a9.png')"></canvas>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+단순if문 <br>
+<script type="text/javascript">
+	var su = 5;
+	if (su > 3) { //수행할 문장이 복수일 경우에는 블록화 {} 한다
+		document.write("크구나");
+		document.write("<br>안녕");
+	}
+	document.write("<br>if test1 end")
+
+	//else test
+	var su2 = 3;
+	if (su2 % 2 === 0){
+		document.write("짝수");
+	}
+	else{
+		document.write("홀수");
+	}
+	document.write("<br>if test2 end");
+
+	document.write("<br>");
+	var irum = "홍길동"
+	if(irum === "홍길동"){
+		document.write("맞네");
+	}
+	else{
+		document.write("아니야");
+	}
+
+	document.write("<br>키보드로 자료입력 받을때<br>")
+	
+	/*re = prompt("자료 입력");  //re에 입력된 자료는 스트링
+	document.write(Number(re) + 10);  */
+	
+	var jumsu;
+	//jumsu = prompt("평균점수 입력:");
+	jumsu = 88;
+	if(jumsu >= 80){
+		document.write("<br>우수하네요 ==> 점수는 " + jumsu);
+	}
+	else{
+		document.write("<br>노력하세요 ==> 점수는 " + jumsu)
+	}
+
+	document.write("<br> 다음작업 계속");
+
+	//다중 if
+	//ave = prompt("평균점수 입력");
+	ave = 93;
+	if(ave >= 90)
+		if (ave >= 95){
+			document.write("<br>95점 이상");
+		}
+		else{
+			document.write("<br>90 ~ 94점 사이");
+		}
+
+		else{
+			document.write("<br> 90점 미만");
+		}
+
+		//ave = prompt("평균점수 입력");
+		ave = 5;
+		if(ave >= 90){
+			document.write("<br> 90점 이상")
+		}
+		else
+			if(ave >= 80){
+				document.write("<br> 80점 이상")
+			}
+			else{
+				document.write("<br> 80점 미만")
+			}
+
+		//ave = prompt("평균점수 입력");
+		ave = 5;
+		document.write("<br>");
+		if(ave >= 90){
+			document.write("수");
+		}
+		else if(ave >= 80){
+			document.write("우");
+		}
+		else if(ave >= 70){
+			document.write("미");
+		}
+		else if(ave >= 60){
+			document.write("양");
+		}
+		else{
+			document.write("가");
+		}
+
+//문제 키보드로부터 id와 비밀번호를 입력받아 맞으면
+		//정회원 틀리면 회원가입 문자열출력
+		//id abc 
+		//password my111
+		//대소문자구분
+		document.write("<br>");
+		id = prompt("id");
+		password = prompt("password")
+			id.toUpperCase();
+			password.toUpperCase();
+			if(id === "ABC" && password === "MY111")
+				document.write("정회원입니다");
+			else
+				document.write("회원가입 하세요");
+</script>
+</body>
+</html>

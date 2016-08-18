@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript">
+		window.onload = function(){
+			document.getElementById('btn1').onclick = calc
+		
+		}
+	
+		
+		function calc(){
+
+
+			var regAge = /^[0-9]$/; //숫자만입력받음
+			if(!frm.su1.value.match(regAge))
+			{
+			alert("숫자를 입력하시오")
+			frm.su1.focus();
+			return;
+		}
+			
+			var regAge = /^[0-9]$/; //숫자만입력받음
+			if(!frm.su2.value.match(regAge))
+			{
+			alert("숫자를 입력하시오")
+			frm.su2.focus();
+			return;
+			}	
+			
+
+			if(frm.check[0].checked == true){
+				total = parseFloat((frm.su1.value)) + parseFloat((frm.su2.value))
+				document.getElementById("show").innerHTML = total
+			}
+			
+			else if(frm.check[1].checked == true){
+				total = parseFloat((frm.su1.value)) - parseFloat((frm.su2.value))
+				document.getElementById("show").innerHTML = total
+			}
+			
+			else if(frm.check[2].checked == true){
+				total = parseFloat((frm.su1.value)) * parseFloat((frm.su2.value))
+				document.getElementById("show").innerHTML = total
+			}
+			
+			else if(frm.check[3].checked == true){
+				if(frm.su2.value == "0"){
+					alert("0으로 나눌수 없습니다.")
+					return
+				}
+				else
+				total = parseFloat((frm.su1.value)) / parseFloat((frm.su2.value))
+				document.getElementById("show").innerHTML = total
+			}
+
+			else
+				alert("연산자를 선택해주세요")
+
+}
+
+	</script>
+</head>
+<body>
+<a href="http://www.naver.com">** 미니계산기 **</a>
+
+
+
+<form action="form.jsp" name = "frm" method="get">
+
+숫자1 : <input type="text" name="su1" placeholder="숫자입력"></input><br>
+숫자2: <input type="text" name="su2" placeholder="숫자입력"></input><br>
+연산선택 : 
+<input type="radio" name="check">+</input>
+<input type="radio" name="check">-</input>
+<input type="radio" name="check">*</input>
+<input type="radio" name="check">/</input><br>
+<div id="show">결과 : </div>
+<input type="button" id="btn1" value="계산">
+<input type="reset" id="btn2" value="초기화">
+
+</form>
+
+</body>
+</html>

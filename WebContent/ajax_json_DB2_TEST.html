@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	var xhr;
+	
+
+	function c(id) {
+		if (id == 1) {
+			startXhr(   )
+		} else if (id == 2) {
+			startXhr(2)
+		} else if (id == 3) {
+			startXhr(3)
+		} else if (id == 4) {
+			startXhr(4)
+		}else if (id == 5) {
+			startXhr(5)
+		}
+	}
+
+	function startXhr(id) {
+		xhr = new XMLHttpRequest();
+		xhr.open("get", "jspjson2Test.jsp", true);
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4) {
+				if (xhr.status == 200) {
+					if (id == 1) {
+						process(1);
+					} else if (id == 2) {
+						process(2);
+					} else if (id == 3) {
+						process(3);
+					} else if (id == 4) {
+						process(4);
+					}else if (id == 5) {
+						process(5);
+					}
+				} else {
+					alert("실패" + xhr.status);
+				}
+			}
+		}
+		xhr.send(null);
+		
+	}
+
+	function process(id) {
+		var data = xhr.responseText;
+		//alert(data)
+		var parsedata = JSON.parse(data);
+		//alert(parsedata.sangpums.length);
+		var str = "";
+		for (var i = 0; i < parsedata.sangpums.length; i++) {
+		
+			if (id == 1) {
+				var bn = parsedata.sangpums[i].buna;
+				str += parsedata.sangpums[i].sano + " "
+				+ "<a href=\"#none\" onClick=\"bus('" + bn + "'); return false;\">" + parsedata.sangpums[i].sana + "</a>"
+				+ parsedata.sangpums[i].saji + " "
+				+ parsedata.sangpums[i].sage + "<br/>";
+			} else if (id == 2) {
+				if(parsedata.sangpums[i].saji == "부장"){
+					var bn = parsedata.sangpums[i].buna;
+				str += parsedata.sangpums[i].sano + " "
+				+ "<a href=\"#none\" onClick=\"bus('" + bn + "'); return false;\">" + parsedata.sangpums[i].sana + "</a>"
+				+ parsedata.sangpums[i].saji + " "
+				+ parsedata.sangpums[i].sage + "<br/>";
+				}
+			} else if (id == 3) {
+				if(parsedata.sangpums[i].saji == "과장"){
+					var bn = parsedata.sangpums[i].buna;
+					str += parsedata.sangpums[i].sano + " "
+					+ "<a href=\"#none\" onClick=\"bus('" + bn + "'); return false;\">" + parsedata.sangpums[i].sana + "</a>"
+					+ parsedata.sangpums[i].saji + " "
+					+ parsedata.sangpums[i].sage + "<br/>";
+					}
+			} else if (id == 4) {
+				if(parsedata.sangpums[i].saji == "대리"){
+					var bn = parsedata.sangpums[i].buna;
+					str += parsedata.sangpums[i].sano + " "
+					+ "<a href=\"#none\" onClick=\"bus('" + bn + "'); return false;\">" + parsedata.sangpums[i].sana + "</a>"
+					+ parsedata.sangpums[i].saji + " "
+					+ parsedata.sangpums[i].sage + "<br/>";
+					}
+			}else if (id == 5) {
+				if(parsedata.sangpums[i].saji == "사원"){
+					var bn = parsedata.sangpums[i].buna;
+					str += parsedata.sangpums[i].sano + " "
+					+ "<a href=\"#none\" onClick=\"bus('" + bn + "'); return false;\">" + parsedata.sangpums[i].sana + "</a>"
+					+ parsedata.sangpums[i].saji + " "
+					+ parsedata.sangpums[i].sage + "<br/>";
+					}
+			}
+
+		}
+
+		document.getElementById("show").innerHTML = str;		
+		
+	}
+	function bus(buser) {
+		var data = xhr.responseText;
+		var parsedata = JSON.parse(data);
+				var cc = 0;
+		var str = "부서정보<br>";
+			str += "부서명 : " + buser + "     "
+		for (var i = 0; i < parsedata.sangpums.length; i++) {
+			if(parsedata.sangpums[i].buna == buser){
+				var tel = parsedata.sangpums[i].bute;
+				cc++;
+			}
+			
+		}
+			str += "전화 : " + tel + "<br>" + "근무인원 : " + cc;
+		document.getElementById("show2").innerHTML = str;
+	}
+
+</script>
+</head>
+<body>
+	<button id="btn1" onclick="c('1');">전체</button>
+	<button id="btn2" onclick="c('2');">부장</button>
+	<button id="btn3" onclick="c('3');">과장</button>
+	<button id="btn4" onclick="c('4');">대리</button>
+	<button id="btn5" onclick="c('5');">사원</button>
+
+	<hr>
+	<div id="show"></div>
+	<div id="show2"></div>
+</body>
+</html>

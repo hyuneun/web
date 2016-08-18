@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript">
+		window.onload = function(){
+			document.getElementById('colorW').onclick = function(){
+				document.bgColor = "white"
+			}
+			document.getElementById('colorG').onclick = function(){
+				document.bgColor = "#0f0"
+			}
+			document.getElementById('colorR').onclick = function(){
+				document.bgColor = "rgb(100%, 0%, 0%)"
+			}
+			
+
+
+			document.getElementById('hello').onclick = function(){
+				//console.log(event.pageX + " " + event.pageY)
+				document.getElementById('show').innerText = "안녕하세요"
+			}
+			document.getElementById('calc').ondblclick = function(){
+				var ss = "연산결과는 " + (10 + 20); 
+				document.getElementById('show').innerText = ss;
+			}
+			document.getElementById('name').onmouseover = function(){
+				
+				document.getElementById('show').innerText = "넌 홍길동"
+			}
+			document.getElementById('name').onmouseout = function(){
+				
+				document.getElementById('show').innerText = " "
+			}
+			
+
+
+			document.getElementById('daum1').onclick = function(){
+				
+				document.getElementById('daum').innerHTML = sbs()
+				//event.preventDefault() 해당태그의 고유기능해제
+				//terurn false 위와동일
+			}
+
+
+			var sdata = document.getElementById("sel")
+			/*sdata.onclick = function(){
+				alert(sdata.value)
+			}*/
+			document.getElementById("sel").onchange = function(){
+					document.getElementById("disp").innerText = sdata.value
+
+			}
+	
+			strPrint();
+		}
+		
+
+		function sbs(){
+			alert("서울방송")}
+
+			var msg = "자바스크립트세상";
+			var i = 0;
+			function strPrint(){
+				document.getElementById("print").innerText = msg.charAt(i)
+				i++;
+				if(msg.length === i) i = 0
+				setTimeout("strPrint()", 500)
+			}
+	</script>
+</head>
+<body>
+** 이벤트 정리 **</p>
+<input type="button" value="흰색" id="colorW"></input>
+<input type="button" value="녹색" id="colorG"></input>
+<input type="button" value="적색" id="colorR"></input>
+
+<hr>
+
+<button id="hello">인사하기(click)</button>
+<button id="calc">계산하기(dblclick)</button>
+<button id="name">이름알기(mouseover)</button>
+<button id="daum1">다음</button>
+
+<hr>
+<br><br>
+<select id="sel">
+	<option value="프로그래머">프로그래머</option>	
+	<option value="웹디자이너">웹디자이너</option>
+	<option value="DB관리자">DB관리자</option>
+</select>
+<hr>
+<div id="show">출력장소1</div>
+<div id="disp" style="font-size: 24px;">출력장소2</div>
+<div id="print" style="font-size: 100px;">출력장소3</div>
+</body>
+</html>

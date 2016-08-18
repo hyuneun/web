@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>반복문</title>
+</head>
+<body>
+for test <br>
+<script type="text/javascript">
+	//누적
+	k = 1;
+	k = k + 1;
+	k += 1;
+	++k; //전위증가 연산자
+	k++; //후위증가 연산자
+	document.write("k는" + k + "<br>")
+
+	for(a = 1; a <= 5; a++){
+		document.write("a는 ", + a + " ");
+		document.write("hi", " ");
+	}
+	document.write("<br>for 탈출후 a는 ", + a + " ");
+
+	document.write("<br>")
+	for(a = 5; a>=1; a--){
+		document.write("<br> a는 " + a + " ")
+}
+		document.write("<br> 탈출후 a는" + a)
+
+	for(a = 3; a <= 10; a += 2){
+		document.write("<br> a는 " + a + " ")
+}
+		document.write("<br> 탈출후 a는" + a)
+
+	document.write("<br>")
+		var m = 1.5; n = 5.5;
+	for(a = m; a <= n; a += 0.5){
+		document.write("<br> a는 " + a + " ")
+}
+		document.write("<br> 탈출후 a는" + a)
+	document.write("<br>")
+	//다중 for문
+	for(i = 1; i <= 3; i++){
+		document.write("<b>i: " + i + "</b>&nbsp;&nbsp;")
+			for(j = 1; j <= 4; j++){
+				document.write("j: " + j + "&nbsp;&nbsp;")
+
+		}
+document.write("<br>")
+	}
+document.write("<br>")
+document.write("<br>")
+hap = 0;
+for(su = 1; su <= 10; su++){
+	document.write(su + " ")
+.
+	hap += su;
+}
+document.write("<br>합은 " + hap);
+//문제 키보드로부터 숫자를 받아 1부터 해당 숫자까지의 합을 출력
+	document.write("<br>")
+	document.write("<br>")
+	
+	var c = prompt("숫자입력");
+	var b = 0;
+	for(aa = 1; aa <= c; aa++){
+		b += aa
+}
+document.write("<br>합은 " + b);
+//ddddddddddddd
+	document.write("<br>")
+	document.write("<br>")
+	h = 0;
+	y = 0;
+	for(z = 1; z <= 100; z++){
+		if(z % 3 === 0){
+			h += z
+			y = y + 1}
+	}
+	document.write("합" + h)
+	document.write("<br>")
+	document.write("갯수" + y)
+//ddddddddddddd
+	document.write("<br>")
+	document.write("<br>")
+	t = 0;
+	for(d = 1; d <= 100; d++){
+		if(d % 2 === 0 && d % 5 != 0)
+			t += d
+
+	}
+	document.write(t)
+
+
+
+
+</script>
+</body>
+</html>

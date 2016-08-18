@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+	#fish{
+		font-size: 30px;
+		position: absolute;
+		left: 0px;
+		right: 0px;
+		top: 100px;}
+	</style>
+
+	<script type="text/javascript">
+	point = 0;
+	count = 0;
+	count2 = 0;
+		window.onload = function(){
+			move = document.getElementById('btn2').onclick = function()
+					
+			{ console.log(count)
+				var fish = document.getElementById("fish")
+						if(count <= 10){
+						document.getElementById('fish').innerHTML = '<img src = "image/fish1.png">'
+						count++
+						point += 100;
+						fish.style.left = point + "px"	
+						}
+						
+						else if(count <= 20){
+						document.getElementById('fish').innerHTML = '<img src = "image/fish2.png">'
+						count++
+						point -= 100;
+						fish.style.left = point + "px"
+						}
+						
+						else if(count >= 21){
+							count = 0;
+							point = 0;
+
+						}
+
+
+				sbs = setTimeout("move()", 100);
+					
+			}
+		document.getElementById('btn3').onclick = function(){
+				clearTimeout(sbs)
+
+
+		}
+	
+
+
+	}
+
+	</script>
+
+
+</head>
+<body>
+<input type="button" value="이동2" id="btn2"></input>
+<input type="button" value="멈춤" id="btn3"></input>
+</p>
+<span id="fish"><img src="image/fish1.png"></span>
+</body>
+</html>

@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title>canvas</title>
+	<style type="text/css">
+		section ul li{
+			list-style: none; float:left;
+		}
+		img{
+			width: 120px; padding-left:10px; border: 0px ;
+		}
+		canvas{
+			background-image: url("../image/gross.jpg");
+
+		}
+		
+
+	</style>
+	<script type="text/javascript">
+		
+		window.onload =function()
+		{
+			x=0;
+			canvas = document.getElementById("my");
+			context= canvas.getContext("2d");
+			image=new Image();
+			aasrc=new Array("../a/a1.png","../a/a2.png","../a/a3.png","../a/a4.png","../a/a5.png","../a/a6.png","../a/a7.png")
+			alert(aasrc[0]);
+			image.src=aasrc[0];
+			image.onload=function()
+			{
+				image.src="../a/a1.png"
+				
+			}
+		
+		
+
+			document.getElementById("start").onclick=function()
+			{
+				changeimage(aasrc);
+			
+			}
+			document.getElementById("stop").onclick=function()
+			{
+				clearTimeout(t);
+			}
+		}
+		function changeimage(imgsrc)
+		{
+
+				context.clearRect(0,0,canvas.width,canvas.height);
+				image.src=aasrc[x%7];
+				context.drawImage(image,x*100-100,100,100,400); //이미지 지우고 다시그리기
+				t=setTimeout(changeimage,100);
+				x++
+				if(x==11)x=0;
+				
+		}
+		
+	</script>
+</head>
+<body>
+캔버스에 이미지 담기<p>
+<canvas id="my" width="1000" height="500" style="border:1px solid #c3c3c3"> </canvas>
+<input type="button" id="start" value="시작">
+<input type="button" id="stop" value="정지">
+</body>
+</html>

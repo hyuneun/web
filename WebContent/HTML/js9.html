@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>while문 연습</title>
+</head>
+<body>
+while loop<br>
+<script type="text/javascript">
+	a = 1;
+	while(a <= 5){
+		document.write("반복처리");
+		a++;
+	}
+	document.write("<br>반복처리 후  a:" + a);
+
+	document.write("<br>")
+
+	var i = 0, tot = 0;
+	while(i <= 100){
+		i++
+		tot += i;
+		document.write(i + " ")
+}
+document.write(tot)
+
+
+document.write("<br>")
+document.write("<br>")
+
+
+	i = 0, h = 0, t = 0;
+	while(i <= 100){
+		i++;
+		document.write(i + "<br>")
+		if(i % 2 === 0){
+			t += i
+		}
+		else{
+			h += i
+		}
+}
+		document.write(h)
+		document.write("<br>")
+		document.write("<br>")
+		document.write(t)
+
+
+</script>
+<hr>
+외부의 자바스크립트 파일 읽기
+<script type="text/javascript" src = "js/myjs.js"></script>
+<hr>
+<script type="text/javascript">
+var b = 1;	
+do{	//최소 한번 수행
+	document.write(b + " ")
+	b++
+	}while(b <= 5)
+	document.write("<br>do ~ while 수행후 b:" + b);
+
+	document.write<"<br>"
+	
+	var i = 0, tot = 0;
+		do
+		{
+		i++
+		tot += i;
+		}
+		while(i <= 100)
+		{
+		document.write(i + " ")
+		}
+document.write(tot)
+
+
+
+
+
+
+</script>
+</body>
+</html>

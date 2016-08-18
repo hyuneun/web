@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript">
+		document.write("익명 함수");
+
+		(function()
+		{
+		document.write("<br> 이름이 없는 함수 - 무명함수");
+		}
+		)();   //초기화작업에 쓰인다
+
+		var test = function(n1, n2){ // 익명함수를 변수에 치환
+			document.write("<br> 두수의합은 " + (n1 + n2));
+
+		}
+		test(2, 3)
+		var test2 = test;
+		test2(4, 5)
+	
+		document.write("선언적 함수와 익명함수의 차이")
+
+		test4();
+		function test4(){
+			document.write("<br>선언적 함수 호출 - 메모리에 계속존재")
+		}
+		
+		//kbs() 함수선언전 호출불가
+		var kbs = function(){
+			document.write("<br>익명함수호출 - 휘발성 ,동적")
+		}
+		document.write("<p>중첩함수(내부함수)")
+			function func1(){
+				document.write("<br> func1 처리")
+				
+				function fu1(){
+					document.write("<br> fu1")
+
+				}
+				function fu2(){
+					var sbs = 6;
+					document.write("<br> fu2 " + sbs)
+
+				}
+					fu1()
+					fu2()
+			}
+			func1()
+		//fu1() 내부함수는 외부에서 호출불가능
+		document.write("<P> 함수반환")
+		function outer1(){
+			document.write("<br>outer1")
+			
+			return function(){  //익명함수를 반환
+			document.write("<br>Hello")
+			
+			}
+						//document.write("<br>outer2")
+
+		}
+		outer1()
+		outer1()()
+
+		document.write("<br>")
+
+		function outer2(name){
+			var msg = "안녕" + name
+			document.write("<br><i>" + msg + "</i>")
+			//document.write("<br>" + local)
+			
+			return function(){  //익명함수를 반환
+			var local = "하하"
+			document.write("<br>" + msg + " " + local)
+			
+			}
+			
+		}
+
+		outer2("홍길동")();
+
+		document.write("<br>--------------------------------------------<br>")
+		var mbc = function(arg1){
+			var b = function(arg2){
+				return 2 * arg2;
+
+			}
+				return "결과는 " + b(arg1)
+		}
+		document.write(mbc(3))
+
+
+
+	</script>
+
+
+
+</head>
+<body>
+
+</body>
+</html>

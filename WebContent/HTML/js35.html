@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Dom test</title>
+	<script type="text/javascript">
+		function abc(){
+			//alert("sadf")
+			var my = document.getElementById('my');
+			alert(my.nodeName + " " + my.childNodes[0].nodeValue);
+			//alert(my.firstChild.nodeValue);
+			alert(my.getAttribute("comments"));
+		}
+
+		function def(){
+			//alert("sadf")
+			var arr = document.getElementsByTagName('input')
+			//alert("검색 요소 수:" + arr.length)
+			alert(arr[0].getAttribute("value"));
+		}
+		
+		function process(arg){
+			//alert(arg)
+			var ele = document.createElement("i"); //i tag 생성
+			var txt = document.createTextNode(arg);
+			ele.appendChild(txt) // <i>안녕,반가워</i>
+			
+			
+			document.getElementById("disp").appendChild(ele)
+		
+
+
+		
+		}
+
+		function cle(){
+			re = document.getElementById("disp")
+			while(re.hasChildNodes()){
+			re.removeChild(re.childNodes[0])
+		}
+		}
+	</script>
+</head>
+<body>
+dom 연습<p>
+<h2 id="my" comments="이건 속성">DOM 객체 참조</h2>
+<input type="button" value="id검색" onclick="abc()"></input><br>
+<input type="button" value="element검색" onclick="def()"></input><br>
+<hr>
+ <p>요소생성 및 삭제</p>
+<input type="button" value="요소생성1" onclick="process('반가워')"></input><br>
+<input type="button" value="요소생성2" onclick="process('안녕')"></input><br>
+<br>
+<input type="button" value="요소삭제" onclick="cle()"></input><br>
+
+
+
+<div id="disp">출력장소</div>
+</body>
+</html>

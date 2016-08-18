@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>lay out</title>
+	<style type="text/css">
+	#lay {width: 500px}
+	#sidebar {width: 200px; height: 65px; float: left; background-color: #ff0000;}
+	#header {width: 300px; float: right; background-color: #00ff00;}
+	#content {width: 300px; float: right; background-color: #0000ff;}
+	#footbar {width: 300px; float: right; background-color: #ffff00;}
+	</style>
+</head>
+<body>
+레이아웃연습<br>
+<table border="0" width="500">
+	<tr>
+		<td width="200" bgcolor="#ff0000">sidebar</td>
+		<td width="300">
+			<table border="0" width="300">
+				<tr><td bgcolor="#00ff00">header</td></tr>
+				<tr><td bgcolor="#0000ff">content</td></tr>
+				<tr><td bgcolor="#fff000">footer</td></tr>
+			</table>
+		</td>
+		</tr>
+	</table>
+	<hr>
+
+<div id="lay">
+	<div id="sidebar">sidebar</div>
+	<div id="header">header</div>
+	<div id="content">content</div>
+	<div id="footbar">footbar</div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>while</title>
+</head>
+<body>
+while - continue break<br>
+<script type="text/javascript">
+	var k = 0;
+	while(k <= 10){
+		k++;
+		if(k === 3 || k == 5) continue;
+		document.write(k + " ");
+		if(k === 7) break;
+	}	
+	document.write("while 수행후 k: " + k)
+
+	document.write("<br>")
+	a = 1
+	while(true){
+		a++
+		document.write(a + " ")
+		if(a == 10) break
+	}
+	document.write("while 수행후 a: " + a)
+	document.write("<br>")
+	/*
+	var ans = true, count = 0
+	while(ans){
+	var irum = prompt('이름입력')
+	document.write("이름은" + irum)
+	count += 1;
+	if(irum === "exit") break
+}
+	document.write("횟수: " + count)*/
+	document.write("<br>")
+	while(true){
+		var nai = prompt("나이", "20")
+		nai = nai - nai % 10;
+		document.write("나이는 " + nai + "대")		
+		result = confirm("계속?")
+		if(result == false) break;
+
+	}
+</script>
+</body>
+</html>

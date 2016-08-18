@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>배경화면스크롤(바닥 마찰력 고려)</title>
+<script type="text/javascript">
+	var context;
+	
+	var unit;  //움직이는 유닛
+	var backImg=new Image(); //배경
+	var back1X=0, back2X=800; //배경위치
+	
+	backImg.src="4.jpg" //배경이미지 넣기
+	var run1=new Image();
+	run1.src="images/run1.png";  // 캐릭터 이미지정의
+	var run2=new Image();
+	run2.src="images/run2.png";  //	캐릭터 이미지정의
+	var run3=new Image();
+	run3.src="images/run3.png";  //	캐릭터 이미지정의
+	
+	var unitImages=[];  //유닛의 이미지를 담을 배열
+	
+	run1.onload=confirmLoading;  //이미지 로딩이 완료되었을 때 호출되는 함수 등록하기.
+	run2.onload=confirmLoading;
+	run3.onload=confirmLoading;
+	var countLoading=0;
+	
+	function confirmLoading(){  //이미지 로딩을 확인하는 함수
+		
+		countLoading++; //로딩되는 숫자를 센다.
+		//세 개의 이미지가 모두 로딩 되었을 때 아래 부분이 실행되도록
+		if(countLoading<3) return;	
+	
+		unitImages.push(run1);  //로딩된 이미지를 배열에 담는다.
+		unitImages.push(run2);
+		unitImages.push(run3);
+		
+		unit=new GraphicObject(400, 250, unitImages);  // 유닛 객체 생성하기.
+		unit.setScreenSize(800, 500); // 화면사이즈(이미지x)
+	}
+	
+	window.onload=function(){
+		var canvas=document.getElementById("myCanvas");
+		context=canvas.getContext("2d");
+		
+		document.getElementById("b").onkeydown = function(){ //boby에서 함수실행
+			console.log("keydown");							//onkeydown = 모든키를 눌렀을때
+			if(event.which==37){ //좌
+				unit.setStateX("MINUS_SPEED_X");
+			}
+			if(event.which==38){ //상
+				unit.setStateY("MINUS_SPEED_Y");
+			}
+			if(event.which==39){ //우
+				unit.setStateX("PLUS_SPEED_X");
+			}
+			if(event.which==40){ //하
+				unit.setStateY("PLUS_SPEED_Y");
+			}
+			if(event.which==32 ){
+				//점프
+				//if(unit.y==unit.maxY){ //땅에 착지 했을 때 만 점프 가능하도록
+					unit.speedY = -5; //점프하는 크기
+				//}
+			}
+	        }
+		
+		document.getElementById("b").onkeyup = function(){  //키를 누르지않을때 속도감소
+			if(event.which==38){  //상
+				unit.setStateY("EQUAL_SPEED_Y");
+			}
+			if(event.which==40){  //하
+				unit.setStateY("EQUAL_SPEED_Y");
+			}
+			if(event.which==37){  //좌
+				unit.setStateX("EQUAL_SPEED_X");
+			}
+			if(event.which==39){  //우
+				unit.setStateX("EQUAL_SPEED_X");
+			}
+		}
+		
+		setInterval(drawScreen, 20);  //화면 렌더링 하는 함수 호출하기
+	}
+	//---------------------------------------------------------------------------
+	//---------------------------------------------------------------------------
+	function drawScreen(){   //화면 그리는 함수
+		if(unit.scrollLeft){  //스크롤 해야 한다면
+			back1X -= unit.speedX;
+			back2X -= unit.speedX;
+			if(back1X <= -800){
+				back1X = 800;
+				back2X = 0;
+			}
+			if(back2X <= -800){
+				back2X = 800;
+				back1X = 0;
+			}
+			context.drawImage(backImg,back1X, 0, 800, 500);
+			context.drawImage(backImg,back2X, 0, 800, 500);
+			context.drawImage(unit.getImage(), unit.x - 50, unit.y - 50 , 100, 100);
+		}else{   //스크롤이 아니라면
+			context.drawImage(backImg,back1X,0,800,500);
+			context.drawImage(backImg,back2X,0,800,500);
+			context.drawImage(unit.getImage(), unit.x - 50, unit.y - 50 , 100, 100);
+		}
+		unit.move();
+	};
+	
+	function GraphicObject(x, y, images){
+		this.x=x;  //위치
+		this.y=y;
+		
+		this.speedX=0;  //속도
+		this.speedY=0;
+		
+		this.maxSpeedX=50;  //최고속도
+		this.maxSpeedY=10;
+		
+		this.accelX=0;        //가속도
+		this.accelY=0;
+		this.finalAccelX=0;
+		this.finalAccelY=0;
+		//이미지[배열이다]
+		this.images=images; //애니메이션을 주기 위해 배열로 3개의 이미지를 받아옴.
+		this.imageIndex=0;  //현재 이미지의 인덱스 번호
+
+		this.gravity=2;      //아래방향으로 중력을 준다.
+		
+		this.frictionalF=0.3;  //마찰력
+		 
+		this.airConstant=0;  //공기저항 계수
+		
+		this.minX = -1000;  //한계좌표
+		this.maxX = +1000;
+		this.minY = -1000;
+		this.maxY = 1000;
+		
+		this.stateX = "STOP_X";  //초기상태
+		this.stateY = "STOP_Y";
+		this.scrollStateX = "STOP_X";
+		this.scrollStateY = "STOP_Y";
+		
+		this.scrollLeftX = 400;   //화면 스크롤 기준점
+		
+		this.scrollLeft = false;   //스크롤 상태 
+		this.callCount = 0;
+		
+		this.setStateX=function(stateX){
+			this.stateX = stateX;
+			if(stateX == "STOP_X"){              //정지상태
+				this.speedX = 0;
+				this.accelX = 0;
+			}else if(stateX == "PLUS_SPEED_X"){    //x방향 속도 증가 상태
+				this.accelX = 3;
+			}else if(stateX == "EQUAL_SPEED_X"){  //x방향 속도 일정 상태
+				this.accelX = 0;
+			}else if(stateX == "MINUS_SPEED_X"){  //x방향 속도 감소 상태
+				this.accelX = -1;
+			}
+		};
+		
+		this.setStateY=function(stateY){
+			this.stateY = stateY;
+			if(stateY == "STOP_Y"){              //정지상태
+				this.speedY = 0;
+				this.accelY = 0;
+			}else if(stateY == "PLUS_SPEED_Y"){    //y방향 속도 증가 상태
+				this.accelY = 1;
+			}else if(stateY == "EQUAL_SPEED_Y"){  //y방향 속도 일정 상태
+				this.accelY = 0;
+			}else if(stateY == "MINUS_SPEED_Y"){  //y방향 속도 감소 상태
+				this.accelY = -1;
+			}
+		};
+		
+		this.move=function(){   //움직이는 함수
+			this.calcAccel();   //가속도 계산
+			
+			this.speedX += this.finalAccelX / 5.0;   //속도 계산하기.
+			this.speedY += this.accelY / 5.0;
+
+			console.log(this.speedX);
+			
+			this.unitAnimation();  //애니메이션을 주기 위해
+			
+			if(this.speedX >= this.maxSpeedX ){  //최고 속도에 다다랐다면
+				this.speedX = this.maxSpeedX;
+			}
+			if(this.speedX <= -this.maxSpeedX){
+				this.speedX = -this.maxSpeedX
+			}
+			
+			this.x += this.speedX;  //속도 만큼 좌표를 움직인다.
+			this.y += this.speedY;
+			
+			if(this.x >= this.scrollLeftX){ //왼쪽방향으로 스크롤 해야 되는 상태라면
+				this.scrollLeft = true;  //스크롤 상태로 바꾼다.
+				this.x -= this.speedX;  //이미 움직인 양을 빼준다.
+			}else{
+				//스크롤될 수 있도록 상태 값을 바꿔준다.
+				this.scrollLeft = false;	
+			}
+			
+			if(this.x <= this.minX){  // x 축 y 축 한계치에 다다랐을 때 처리
+				this.x = this.minX;
+				this.setStateX("STOP_X");
+			}
+			if(this.x >= this.maxX){
+				this.x = this.maxX;
+				this.setStateX("STOP_X");
+			}
+			if(this.y <= this.minY ){
+				this.y = this.minY;
+				this.setStateY("STOP_Y");
+			}
+			if(this.y >= this.maxY){
+				this.y = this.maxY;
+				this.setStateY("STOP_Y");
+			}
+		};
+		
+		this.calcAccel=function(){
+			this.accelY=this.gravity;  //y방향 가속도를 중력을 고려한다.
+			//x 방향 마찰력을 부여하기 위해(땅에 있을 때만 => y 방향 한계점)
+			if(this.speedX > 0 && this.speedX != 0 && this.y == this.maxY){
+				this.finalAccelX = this.accelX - this.frictionalF;
+			}else if(this.speedX < 0 && this.speedX != 0 && this.y == this.maxY){
+				this.finalAccelX = this.accelX + this.frictionalF;
+			}else{
+				this.finalAccelX = this.accelX;
+			}
+		}
+		//유닛에 애니메이션을 주기 위해
+		this.unitAnimation=function(){
+			//속도가 빠를수록 빠른 애니메이션을 주도록 한다.
+			if(this.speedX > 0.1 &&  this.speedX <= 10){
+				this.callCount += 1;
+			}else if(this.speedX > 10 && this.speedX <= 20){
+				this.callCount += 2;
+			}else if(this.speedX > 20 && this.speedX <= 30){
+				this.callCount += 3;
+			}else if(this.speedX > 30 && this.speedX <= 40){
+				this.callCount += 4;
+			}else if(this.speedX > 40 && this.speedX <= 51){
+				this.callCount += 5;
+			}
+			if(this.callCount >= 10 ){
+				this.callCount=0;
+				this.imageIndex += 1;
+				if(this.imageIndex == 3) this.imageIndex=0;
+			}
+			
+		}
+		
+		this.getImage=function(){  //이미지를 리턴하는 함수
+			return this.images[this.imageIndex];
+		}
+		
+		this.setScreenSize=function(width,height){  //화면의 크기를 넣어주는 함수
+			this.minX=50;
+			this.maxX=width-50;
+			this.minY=50;
+			this.maxY=height-50;
+		}
+	}
+</script>
+</head>
+<body id="b">
+<canvas id="myCanvas" width="800" height="500"></canvas>
+</body>
+</html>

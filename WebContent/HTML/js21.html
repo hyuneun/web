@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>게임</title>
+	<script type="text/javascript">
+		function dispInfo(){
+			document.write("<hr>보물이 가득한 나라로 모험을 떠나자.")
+			document.write("<hr>마지막 관문인 동물만 통과하면 된다.")
+			document.write("<hr>동굴속에는 용 두마리가 살고 있다.")
+			document.write("<hr>순한용과 포악한 용이 있다.")
+			document.write("<hr>동굴 입구는 2군데이고 번호를 선택하면 된다.")
+			document.write("<hr>죽거나 부자가 되느냐 ㅠㅠ.<br> 출발")
+
+		}
+
+		function chooseCave(){
+			var cave = ""
+			while(cave !== "1" && cave !== "2"){
+				cave = prompt("동굴번호를 선택(1 or 2)")
+
+			}
+			return cave
+		}
+
+		function checkCave(caveNumber){
+			document.write("<br> 동굴에도착")
+
+			randNum = randomRange(1, 2)
+		//console.log(randNum)
+			if(caveNumber == randNum){
+				document.write("<br>와우 착한용을 만났네요")
+			}
+			else{
+				document.write("<br>으악")
+			}
+
+		}
+
+		function randomRange(n1, n2){
+			//console.log("두수를 이용한 난수생성", n2 - n1 + 1)
+			//console.log("두수를 이용한 난수생성", (Math.random() * (n2 - n1 + 1)) + n1)
+			
+			return Math.floor((Math.random() * (n2 - n1 + 1)) + n1)
+			console.log(randomRange(1, 2))
+		}
+
+	</script>
+</head>
+<body>
+죽기아니면 살기 게임<br>
+<script type="text/javascript">
+	while(1){
+		dispInfo()
+
+		var caveNumber = chooseCave()
+		//console.log(caveNumber)
+
+		
+
+		checkCave(caveNumber)
+
+
+
+	var playAgain = prompt("계속할까요?(y or n)")
+	if(playAgain !== "y"){
+		document.write("<br>잘가")
+		break
+
+	}
+	}
+
+</script>
+</body>
+</html>

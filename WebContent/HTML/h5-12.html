@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>canvas</title>
+<script type="text/javascript">
+var context;
+var holes = []; //총알 구멍	
+var backImage = new Image();
+backImage.src = "images/background.jpg";
+
+var holeImage = new Image();
+holeImage.src = "images/hole.png";
+var snipeImage = new Image();
+snipeImage.src = "images/snipe.png";
+
+var bubbleImg0 = new Image();
+bubbleImg0.src = "images/b0.png";
+var bubbleImg1 = new Image();
+bubbleImg1.src = "images/b1.png";
+var bubbleImg2 = new Image();
+bubbleImg2.src = "images/b2.png";
+var bubbleImg3 = new Image();
+bubbleImg3.src = "images/b3.png";
+var bubbleImg4 = new Image();
+bubbleImg4.src = "images/b4.png";
+var bubbleImg5 = new Image();
+bubbleImg5.src = "images/b5.png";
+
+var bubbles = [];     //풍선 이미지 배열
+var bubbleChip = [];  //파편 이미지 배열
+var bubbleImg = bubbleImg0;  //초기 풍선 타겟
+
+var fireSound = new Audio("sounds/fire.wav");
+var jangSound = new Audio("sounds/jang.wav");
+
+var banY = 0;  //총 쏘면 반동 효과
+var isJanged = true;   //배경 화면에 총알 구멍 내기
+
+var snipeX = 400, snipeY = 150; //총구의  초기 좌표
+var targetX = 0, targetY = 0;     //풍선의  초기 좌표
+var bubbleX = 0, bubbleY = 0;
+var moveCount = 0;          //풍선의 이동 횟수
+var deltaX = 0, deltaY = 0; //풍선과 총구의 전체 거리
+var stepX = 0.0, stepY = 0.0; //풍선이 총구를 찾아 가는 증가 값
+
+window.onload = function(){
+	initImage();
+
+	var canvas = document.getElementById("myCanvas");
+	context = canvas.getContext("2d");
+
+	setInterval(drawScreen, 50);  //주기적으로 화면 갱신
+
+	document.body.onmousedown = makeHole;
+	document.body.onmousemove = moveSnipe;
+}
+
+function initImage(){
+	bubbles[0] = bubbleImg0;
+	bubbles[1] = bubbleImg1;
+	bubbles[2] = bubbleImg2;
+	bubbles[3] = bubbleImg3;
+	bubbles[4] = bubbleImg4;
+	bubbles[5] = bubbleImg5;
+}
+
+function drawScreen(){
+	context.drawImage(backImage, 0, 0, 890, 300);
+
+	for(index in holes){
+		context.drawImage(holeImage, holes[index].x - 10, holes[index].y - 10, 20, 20);
+	}
+
+	//총구를 풍선의 중앙에 맞추기
+	context.drawImage(bubbleImg, bubbleX - 25, bubbleY - 25, 50, 50);
+
+	for(var i=0; i < bubbleChip.length; i++) { //풍선 파편 그리기
+		context.drawImage(bubbleChip[i].img, bubbleChip[i].x, bubbleChip[i].y, 10, 10);
+	}
+
+	//풍선 파편 이동
+	for(var i = bubbleChip.length - 1; i >= 0; i--){
+		bubbleChip[i].x += bubbleChip[i].speedX;
+		bubbleChip[i].y += bubbleChip[i].speedY;
+	}
+
+	//총구 그리기
+	context.drawImage(snipeImage, snipeX - 50, (snipeY - 50) - banY, 100, 100);
+
+	moveToTarget();  //풍선을 총구까지 움직인다
+
+	if(banY > 0){  //반동 줄이기
+		banY -= 5;
+
+		if(banY <= 0){
+			banY = 0;
+			isJanged = true;
+			makeJang();
+		}
+	}
+}
+
+function moveToTarget(e){
+ var msg = "targetX:" + targetX + " targetY:" + targetY + "<br>" +"snipeX:" + snipeX + " snipeY:" + snipeY + "<br>" +	 
+ 	 "bubbleX:" + bubbleX + " bubbleY:" + bubbleY + "<br>" + 
+ 	 "moveCount:" + moveCount;
+
+	funcLog(msg);
+
+	if (moveCount == 100) return;
+	bubbleX += stepX;
+	bubbleY += stepY;
+
+	moveCount++;
+}
+
+function funcLog(msg){
+	var con = document.getElementById("console");
+	con.innerHTML = msg + "<br>";
+}
+
+function makeHole(e){  //총알 구멍 만들기
+	var eventX = e.offsetX;
+	var eventY = e.offsetY;
+
+	var target = e.target.nodeName;
+	if(target == "CANVAS" && isJanged){
+		fireSound.currentTime = 0;
+		fireSound.play();
+
+		var hole = [];
+		hole.x = eventX;
+		hole.y = eventY;
+		holes.push(hole);
+
+		isJanged = false;
+		banY = 30;  //총구 반동값
+
+		checkBubble(hole);
+	}
+}
+
+function checkBubble(hole){  //풍선이 총에 맞았는지 검사
+	if(hole.x > bubbleX - 25 && hole.x < bubbleX + 25 && 
+		hole.y > bubbleY - 25 && hole.y < bubbleY + 25){
+		makeBubbleChip();
+	}
+}
+
+function makeBubbleChip(){  //풍선 파편 만들기
+	//alert("good");
+	var chipX = bubbleX;
+	var chipY = bubbleY;
+
+	for(var i = 0; i < 30; i++){
+		var chip = [];
+		var speedX = Math.round(Math.random() * 20 - 10);
+		var speedY = Math.round(Math.random() * 20 - 10);
+		var imgIndex = Math.floor(Math.random() * 6);
+		console.log(speedX, " ", speedY, " ", imgIndex);
+
+		chip.x = chipX;
+		chip.y = chipY;
+		chip.speedX = speedX;
+		chip.speedY = speedY;
+		//chip.isDead = false;
+		chip.img = bubbles[imgIndex];
+		bubbleChip[i] = chip;
+	}
+
+	makeNewBubble();  //새 풍선 만들기
+}
+
+function makeNewBubble(){
+	var x = Math.round(Math.random() * 890);
+	var y = Math.round(Math.random() * 300);
+	var imgindex = Math.floor(Math.random() * 6);
+
+	bubbleX = x;
+	bubbleY = y;
+	bubbleImg = bubbles[imgindex];
+	targetX = snipeX;
+	targetY = snipeY;
+	deltaX = targetX - bubbleX;
+	deltaY = targetY - bubbleY;
+	stepX = deltaX / 100.0;
+	stepY = deltaY / 100.0;
+	moveCount = 0;
+}
+
+function moveSnipe(e){
+	var eventX = e.offsetX;
+	var eventY = e.offsetY;
+
+	var target = e.target.nodeName;
+	if(target == "CANVAS"){
+		snipeX = eventX;
+		snipeY = eventY;
+
+		targetX = eventX;
+		targetY = eventY;
+
+		//총구와 풍선 사이의 x, y축 방향 거리
+		deltaX = targetX - bubbleX; 
+		deltaY = targetY - bubbleY;
+
+		stepX = deltaX / 100.0;
+		stepY = deltaY / 100.0;
+		moveCount = 0;  //100등분한 거리를 몇번 이동했는지 표시
+	}
+}
+
+function makeJang(){  //장전 소리 내기
+	jangSound.currentTime = 0;
+	jangSound.play();
+}
+</script>
+</head>
+<body>
+<div style="margin: auto">
+	<canvas id="myCanvas" width="890" height="300"></canvas>
+</div>
+<div id="console" style="width: 500px;"></div>
+</body>
+</html>

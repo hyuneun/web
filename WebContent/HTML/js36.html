@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript">
+		window.onload = function(){
+			document.getElementById('sel').onchange = function(){
+			//alert("aa")
+			var sangpum=comment=""
+			var sel = frm.sel.options[frm.sel.selectedIndex].value
+			//alert(sel)
+			var sang = frm.sel.options[frm.sel.selectedIndex].text
+			//alert(sang + " " + sel)
+			 
+			if(sang === "선택") return
+			sangpum = sang
+			if(sel === '1000'){
+				//sangpum = sang
+				comment = '부드럽게 잘 써짐'
+
+			}else if (sel === '2000'){
+				//sangpum = sang
+				comment = '수업내용 정리용'
+			}else if (sel === '3000'){
+				//sangpum = sang
+				comment = '일회용'
+			}
+			//alert(sangpum + " " + comment);
+			addRow(sangpum, comment);
+			
+			//table에 border 속성추가
+			document.getElementById("myTable").setAttribute('border', '1', 'bgcolor', "yellow", 'bordercolor', "red")	
+		}
+			//제목출력
+			var h = document.createElement("h2");
+			var t = document.createTextNode("결과");
+			h.appendChild(t);
+			var h = document.getElementById("header").appendChild(h)
+	}
+
+	function addRow(sangpum, comment){  //table에 tr(행)을 추가
+		//alert(sangpum + " " + comment);
+		var row = document.createElement('tr')
+		var col = addCol(sangpum) //col = <td>볼펜</td>
+		row.appendChild(col);
+		//alert(row);
+		var col = addCol(comment)
+		row.appendChild(col);
+
+		document.getElementById('myTable').appendChild(row);
+
+	}
+	function addCol(data){
+		var col = document.createElement('td');
+		var txt = document.createTextNode(data);
+		col.appendChild(txt);
+		return col;
+	}
+</script>
+</head>
+<body>
+** DOM 연습 **<p>
+<form name="frm">
+	상품선택
+	<select name="sel" id="sel">
+		<option value="">선택</option>
+		<option value="1000">볼펜</option>
+		<option value="2000">노트</option>
+		<option value="3000">마우스</option>
+	</select>
+</form>
+<br>
+<span id="header"></span>
+<table id="myTable" font>
+	<tbody id="myTable"></tbody>
+</table>
+</body>
+</html>

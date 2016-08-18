@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>for test</title>
+</head>
+<body>
+continue, break<br>
+<script type="text/javascript">
+	for(k = 1; k <= 10; k++){
+		if(k === 3) continue; //지정된 for문으로 돌아감
+		document.write(k + " ");
+		if(k === 5) break; // 반복문탈출	
+	}
+
+	//문 1~10까지의 합출력(3,6은 제외)
+	
+
+		var a = 0;
+		for(k = 1; k <= 10; k++){
+		if(k === 3 || k === 6) continue
+		a += k	
+	}
+		document.write("합" + a)
+		
+		document.write("<br>")
+		document.write("<br>")
+
+		var a = 0;
+		for(k = 1; k <= 100; k++){
+		if(k % 5 === 0) continue
+		a += k	
+	}
+		document.write("합" + a)
+
+		document.write("<br>")
+		document.write("<br>")
+	
+		var a = 0;	
+		var c = prompt("숫자입력");
+		for(k = 1; k <= 1000; k += Number(c)){
+		a += k
+		document.write(a + "<br>")
+		if(a >= 100)
+		{
+		document.write("정지값 " + a)
+		break
+		}
+}
+</script>
+</body>
+</html>

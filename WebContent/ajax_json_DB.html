@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	var xhr;
+	window.onload = function() {
+		document.getElementById("btnok").addEventListener("click", startXhr, false);
+	}
+
+	function startXhr() {
+		xhr = new XMLHttpRequest();
+		xhr.open("get", "jspjson.jsp", true);
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4) {
+				if (xhr.status == 200) {
+					process();
+				}else{
+					alert("실패" + xhr.status);
+				}
+			}
+		}
+		xhr.send(null);
+	}
+	
+	function process(){
+		var data = xhr.responseText;
+		//alert(data)
+		var parsedata = JSON.parse(data);
+		//alert(parsedata.sangpums.length);
+		var str = "";
+		for(var i = 0; i < parsedata.sangpums.length; i++) {
+			str += parsedata.sangpums[i].code + " " +
+					parsedata.sangpums[i].sang + " " +
+					parsedata.sangpums[i].su + " " +
+					parsedata.sangpums[i].dan + "<br/>"; 
+			
+		}
+		
+		document.getElementById("show").innerHTML = str;
+		
+	}
+</script>
+</head>
+<body>
+	<button id="btnok">버튼</button>
+	<hr>
+	<div id="show"></div>
+	
+	<table border='1'><tr><th>고객번호</th><th>고객명</th><th>고객주민</th><th>고객전화</th></tr></table>
+</body>
+</html>

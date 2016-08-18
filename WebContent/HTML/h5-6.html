@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+	canvas{
+		border: blue dotted 1px;
+		cursor: crosshair;
+
+	}
+	#clr div{
+		cursor: pointer;
+		width: 20px;
+		height: 20px;
+		float: left
+	}
+	</style>
+	<script type="text/javascript">
+			var draw = false
+			var preX, preY
+			var ctx;
+			window.onload = function(){
+			var canvas = document.getElementById('can')
+			ctx = canvas.getContext("2d")
+			ctx.strokeStyle = "black"
+			
+			//선그리기 작업----------------------------------------------
+			canvas.addEventListener("mousedown", func1, false)
+			canvas.addEventListener("mouseup", func2, false)
+			canvas.addEventListener("mousemove", func3, false)
+		
+			//var pals = document.getElementsByName('pal')
+			//alert(pals.length)
+			//색상선택----------------------------------------------
+			document.getElementsByName('pal')[0].onclick = function(){
+						funcColor(0)
+			}
+			
+			document.getElementsByName('pal')[1].onclick = function(){
+						funcColor(1)
+			}
+
+			document.getElementsByName('pal')[2].onclick = function(){
+						funcColor(2)
+			}
+			
+			document.getElementsByName('pal')[3].onclick = function(){
+						funcColor(3)
+			}
+			
+			//화면초기화------------------------------------------------------------
+			document.getElementById("clear").onclick = function(){
+					ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+			}
+			//이미지보관------------------------------------------------------------
+			document.getElementById("save").onclick = function(){
+					//alert("s")
+					//alert(canvas.toDataURL())
+					document.getElementById("result").innerHTML = "<img src=" + canvas.toDataURL() + ">";
+
+					//var img = "<img src = 'canvas.toDataURL()'>"
+					
+
+			}
+			//지우개----------------------------------------------------------------
+			document.getElementById("eraser").onclick = function(){
+					//alert("ea")
+					ctx.strokeStyle = "white"
+			}
+		
+			document.getElementById("asd").onchange = function(){
+					
+					ctx.lineWidth = Number(frm.sel.value)
+
+			}
+		}
+		function func1(){
+			//console.log(event.pageX, " ", event.pageY)
+			draw = true
+			preX = event.offsetX
+			preY = event.offsetY
+		}
+
+		function func2(){
+			//console.log(event.pageX, " ", event.pageY)
+			draw = false
+		}
+
+		function func3(){
+			//console.log(event.pageX, " ", event.pageY)
+			if (draw == true){
+				//console.log(event.pageX, " ", event.pageY)
+				
+				ctx.beginPath()
+				ctx.moveTo(preX, preY)
+				ctx.lineTo(event.offsetX, event.offsetY)
+				ctx.stroke()
+				preX = event.offsetX
+				preY = event.offsetY
+				ctx.closePath()
+			}
+		}
+			function funcColor(i){
+				ctx.strokeStyle = document.getElementsByName("pal")[i].getAttribute("value")
+			}
+
+	</script>
+</head>
+<body>
+<canvas id="can" width="300" height="300"></canvas>
+<div id="clr">
+	<div style="background-color: black" name = "pal" value="black"></div>
+	<div style="background-color: red" name="pal" value="red"></div>
+	<div style="background-color: green" name="pal" value="green"></div>
+	<div style="background-color: blue" name="pal" value="blue"></div>
+</div>
+&nbsp;
+<a href="#" id="clear">화면 초기화</a>
+<a href="#" id="save">별도 보관</a>
+<a href="#" id="eraser">지우개</a>
+<br>
+선굵기 선택
+<form name="frm">
+<select name="sel" id="asd">
+<option value="1">1</option>	
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+</select>
+</form>
+<span id="result">이미지</span>
+</body>
+</html>

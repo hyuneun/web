@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript">
+		function func1(){
+			document.getElementById('show').innerHTML = "전통적인방식"
+
+		}
+
+		var a = 10; //기본형변수
+		var b = {	//객체형변수
+			funcNew:function(){
+				document.getElementById('show').innerHTML = "b 객체변수의 함수(메소드) 처럼사용"
+			},
+			funcNew2:function(){
+				document.getElementById('show').innerHTML = "b 객체변수의 맴버 처럼사용"
+			}
+		
+		}
+
+		window.onload = function(){
+		//문서로딩이 완료되면 자동실행(callback function)
+		//alert("success")
+		exBtn1 = document.getElementById("btn1")
+		exBtn1.onclick = function(){ //이벤트 헨들러를 장착
+			document.getElementById('show').innerHTML = "클릭1 수행"
+
+		}
+		/*
+		exBtn2 = document.getElementsByName('myBtn')
+		exBtn2[0].onclick = function(){
+			document.getElementById("show").innerHTML = "클릭2 수행"
+		}
+		exBtn2[1].onclick = function(){
+			document.getElementById("show").innerHTML = "클릭3 수행"
+		}
+	}*/
+	exBtn2 = document.getElementsByName('myBtn')[0];
+		exBtn2.onclick = function(){
+			document.getElementById("show").innerHTML = "클릭2 수행"
+		}
+	
+	exBtn3 = document.getElementsByTagName('input')[5];
+		exBtn3.onclick = function(){
+			document.getElementById("show").innerHTML = "클릭3 수행"
+		}
+	document.getElementById("btn4").onclick = function(){
+		document.getElementById("show").innerHTML = "클릭4 수행"
+
+	}
+		//이벤트 장착및 해제
+		document.getElementById("btn5").addEventListener("click", func2, false);
+	}
+
+	function func2(){
+		document.getElementById("show").innerHTML = "클릭5 수행"
+		document.getElementById("btn5").removeEventListener("click", func2, false);	
+
+	}
+
+	</script>
+</head>
+<body>
+** 이벤트 정리 **</p>
+<input type="button" value="버튼1" onclick="func1()"></input><br>
+<input type="button" value="버튼2" onclick="b.funcNew()"></input><br>
+<input type="button" value="버튼3" onclick="b.funcNew2()"></input><br>
+<br>
+<!-- 이벤트분리 "클래스는 css에서 사용" --> 
+<input type="button" value="클릭1" id="btn1"></input>
+<input type="button" value="클릭2" id="btn2" name="myBtn"></input>
+<input type="button" value="클릭3" id="btn3" name="myBtn"></input>
+<input type="button" value="클릭4" id="btn4"></input>
+<input type="button" value="클릭5" id="btn5"></input>
+
+<hr>
+<div id="show"></div>
+</body>
+</html>

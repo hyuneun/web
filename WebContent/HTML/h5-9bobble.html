@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>canvas</title>
+<style type="text/css">
+	canvas{
+		
+		cursor: none;
+
+	}
+</style>
+<script type="text/javascript">
+	var context;
+	var backImg, bubbleImg
+	var bubbleX = 250, bubbleY = 250
+	var targetX, targetY
+	var bubbles = new Array();
+	var eventX, eventY
+	var imageIndex = 0
+	var count = 0
+	window.onload = function(){
+		var canvas = document.getElementById('mycanvas')
+		context = canvas.getContext("2d")
+		
+		backImg = new Image();
+		backImg.src = "image/lighthouse.jpg"
+		
+		var bubbleimg0 = new Image()
+		bubbleimg0.src = "image/b0.png"
+		
+		var bubbleimg1 = new Image()
+		bubbleimg1.src = "image/b1.png"
+		
+		var bubbleimg2 = new Image()
+		bubbleimg2.src = "image/b2.png"
+		
+		var bubbleimg3 = new Image()
+		bubbleimg3.src = "image/b3.png"
+		
+		var bubbleimg4 = new Image()
+		bubbleimg4.src = "image/b4.png"
+		
+		var bubbleimg5 = new Image()
+		bubbleimg5.src = "image/b5.png"
+
+		bubbles = [bubbleimg0, bubbleimg1, bubbleimg2, bubbleimg3, bubbleimg4, bubbleimg5]
+		setTimeout(gogo, 1000)
+	
+		document.body.onmousemove = moveBubble
+		document.getElementById("mycanvas").addEventListener("click", playSound, false);
+
+	}
+
+	function gogo(){
+		setInterval(drawCanvas, 10) // 1 / 100초마다 함수호출
+
+	}
+
+	function drawCanvas(){
+	context.drawImage(backImg, 0, 0, 500, 300);
+	context.drawImage(bubbles[imageIndex], bubbleX - 25, bubbleY - 25, 50, 50)
+	
+	moveToTarget();
+	count++;
+
+	if(count % 20 == 0){
+		imageIndex++
+		if(imageIndex == 6) imageIndex = 0
+		}
+		
+	}
+	
+	function moveBubble(e){
+		console.log(e.target.nodeName) // div , cnavas
+		if(e.target.nodeName != "CANVAS") return
+
+		eventX = e.offsetX
+		eventY = e.offsetY
+		dispfunc("마우스 위치는 x:" + eventX + "y: " + eventY)
+
+		targetX = eventX
+		targetY = eventY
+	}
+	
+	function dispfunc(msg){
+		document.getElementById("dispxy").innerHTML = msg
+	}
+	
+	function moveToTarget(){	//타겟으로이동(마우스포인터)
+		var deltaX = targetX - bubbleX
+		var deltaY = targetY - bubbleY
+		//cellX = deltaX
+		//cellY = deltaY
+
+		cellX = deltaX / 100.0
+		cellY = deltaY / 100.0
+
+		bubbleX += cellX
+		bubbleY += cellY
+		//console.log(deltaX + " " + deltaY + " " + cellX + " " + cellX + " ")
+	}
+	function playSound(){
+		s = document.getElementById("sound")
+		s.play()
+
+		if(eventX >= 350 && eventX <= 390 && eventY >= 40 && eventY <= 60 ){
+				backImg.src = "image/lighthouse2.jpg"
+			}else{
+				backImg.src = "image/lighthouse.jpg"
+
+			}
+		}
+</script>
+</head>
+<body>
+
+<div>
+	<canvas id="mycanvas" width="500" height="300"></canvas>
+</div>
+<div id="dispxy"></div>
+<audio src="sounds/laugh.wav" id="sound"></audio>
+</body>
+</html>

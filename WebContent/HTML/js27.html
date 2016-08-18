@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+	span(font-size: 20px; background-color: red)
+	</style>
+	<script type="text/javascript">
+		var contents = new Array()
+		contents[0] = "네이버 방문 <a href='http://www.naver.com'>네이버</a>"
+		contents[1] = "다음 방문 <a href='http://www.daum.net'>다음</a> 뭐가잇을까"
+		contents[2] = "방송국 방문 <a href='http://www.kbs.co.kr'>kbs</a>"
+	
+		var tg
+		var currenmsg = 0
+		var count = 0
+		function msg(){
+			if(currenmsg == contents.length - 1){
+				currenmsg = 0
+			}
+			else{
+				currenmsg += 1
+			}
+			//setTimeout("changecontent()", 2000);
+
+			sbs = setTimeout("changecontent()", 2);
+			//count++;
+				//if(count == 5) clearTimeout(sbs)
+		}
+
+		function changecontent(){
+			tg.style.clip = "rect(0px 0px auto 0px)"
+			tg.innerHTML = contents[currenmsg]
+			
+			msg()
+		
+		}
+
+
+		window.onload = function(){
+			tg = document.getElementById('target')
+			changecontent()
+		}
+	</script>
+</head>
+<body>
+<span id="target" ></span>
+</body>
+</html>

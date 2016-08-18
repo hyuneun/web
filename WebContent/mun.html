@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script type="text/javascript">
+	window.onload = function() {
+		document.getElementById("btn1").addEventListener("click", func1, false);
+		document.getElementById("btn2").addEventListener("click", func2, false);
+	}
+
+	function func1() {
+		var c = frm.in1.value
+		var b = frm.in2.value
+		var regAge = /^[0-9]*$/;
+		if(frm.in1.value.match(regAge) && frm.in2.value.match(regAge)){
+			total = parseFloat((frm.in1.value)) + parseFloat((frm.in2.value))
+			//document.getElementById("show").innerHTML = total;
+			//document.getElementById("show2").innerHTML = total;
+			process(total);
+			document.getElementById("show").innerHTML = "<i>" + total + "</i>"
+		}else{
+			ttt = c + b;
+			//document.getElementById("show").innerHTML = c + b;
+			//document.getElementById("show2").innerHTML = c + b;
+			process(ttt);
+			document.getElementById("show").innerHTML = "<i>" + ttt + "</i>"
+		}
+		
+	}
+
+	function func2() {
+
+		re = document.getElementById("show")
+		while(re.hasChildNodes()){
+		re.removeChild(re.childNodes[0])
+			
+		}
+		document.getElementById("show2").innerHTML = "";
+		document.getElementByName("in1").innerHTML = "";
+		document.getElementByName("in2").innerHTML = "";
+	}
+	
+	function process(arg){
+		document.getElementById("show2").innerHTML = "";
+		var ele = document.createElement("i"); //i tag 생성
+		var txt = document.createTextNode(arg);
+		ele.appendChild(txt) // <i>안녕,반가워</i>
+		
+		
+		
+		document.getElementById("show2").appendChild(ele)
+		
+
+	
+	}
+</script>
+</head>
+<body>
+
+
+	<form action="form.jsp" name="frm" method="get">
+		자료1<input type="text" name="in1"> <br> 자료2<input
+			type="text" name="in2"> <br> <input type="button"
+			value="확인" id="btn1"> <input type="reset" value="초기화"
+			id="btn2"> 
+			<br> 
+			결과출력(HTML) : <span id="show"></span>
+			<br>
+			결과출력(DOM) : <span id="show2"></span>
+	</form>
+</body>
+</html>

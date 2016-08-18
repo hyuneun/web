@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 이거주석 <![CDATA[이안에있으면 순수데이터로 처리]]-->
+<sawons>
+	<sawon sawon_no="10">
+		<sawon_name>홍길동</sawon_name>
+		<sawon_pay>5000</sawon_pay>
+	</sawon>
+	<sawon sawon_no="20">
+		<sawon_name>&gt;&gt;소길동&lt;&lt;</sawon_name>
+		<sawon_pay>100</sawon_pay>
+	</sawon>
+	<sawon sawon_no="30">
+		<sawon_name><![CDATA[ fghdh<<>>?]]></sawon_name>
+		<sawon_pay>100</sawon_pay>
+	</sawon>
+	
+</sawons>

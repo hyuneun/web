@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>가위바위보</title>
+<style>
+    input {text-align:center; font-weight: bold; font-size: 20px }
+</style>
+
+<script type="text/javascript">
+    var ctx;
+    var everything = [];
+    var rockbx = 50, rockby = 300;
+    var paperbx = 150, paperby = 300;
+    var scissorsbx = 250, scissorsby = 300;
+    var canvas1;
+    var newscore;
+    var result;
+    var choices = ["p3.png", "p1.png", "p2.png"];
+    var compimg = new Image();
+    var beats = [
+        ["비김:둘 다 바위를 냈습니다.", "승리:보가 바위를 감쌉니다.", 
+         "패배:바위가 가위를 망가뜨립니다."],
+        ["패배:보가 바위를 감쌉니다.", "비김:둘 다 보를 냈습니다.", 
+         "승리:가위가 보를 자릅니다."],
+        ["승리:바위가 가위를 망가뜨립니다.", "패배:가위가 보를 자릅니다.", 
+         "비김:둘 다 가위를 냈습니다."]
+    ];
+    var points = [[0, 1, -1],[-1, 0, 1],[1, -1, 0]];
+    var music = [[3, 1, 0],[1, 3, 2],[0, 2, 3]];
+    var audio;
+    var musicch;   //소리 변경
+
+    function Throw(sx,sy, smargin, swidth, sheight, rectcolor, picture) {
+        this.sx = sx;
+        this.sy = sy;
+        this.swidth = swidth;
+        this.bwidth = swidth + 2 * smargin;
+        this.bheight = sheight + 2 * smargin;
+        this.sheight = sheight;
+        this.fillstyle = rectcolor;
+        this.draw = drawThrow;
+        this.img = new Image();
+        this.img.src = picture;
+        this.smargin = smargin;
+    }
+
+    function drawThrow() {
+        ctx.strokeStyle = "rgb(0,0,0)";
+        ctx.strokeRect(this.sx, this.sy, this.bwidth, this.bheight);
+        ctx.fillStyle = this.fillstyle;
+        ctx.fillRect(this.sx, this.sy, this.bwidth, this.bheight);
+        ctx.drawImage(this.img, this.sx + this.smargin, this.sy + this.smargin, 
+                      this.swidth, this.sheight);
+    }
+
+    function choose(ev) {
+        var compch = Math.floor(Math.random() * 3);
+        var compchn = choices[compch];
+        compimg.src = compchn;
+        var mx = ev.layerX;
+        var my = ev.layerY;
+        var i;
+        for (i=0; i < everything.length; i++) {
+            var ch = everything[i];
+            
+            if ((mx > ch.sx) && (mx < ch.sx + ch.bwidth) && (my > ch.sy) && (my < ch.sy + ch.bheight)) {
+                drawall();
+                size = 15;
+                tid = setInterval(flyin,100);
+                result = beats[compch][i];
+                musicch = music[compch][i];
+                newscore = Number(document.f.score.value);
+                newscore += points[compch][i];
+                break;
+            }
+        }
+    }
+
+    function flyin() {
+        ctx.drawImage(compimg, 70, 100, size, size);
+        size += 5;
+        if (size > 50) {
+            clearInterval(tid);
+            ctx.fillText(result, 200, 100, 250);
+            document.f.score.value = String(newscore);
+            audio[musicch].play();
+        }
+    }
+
+    var rockb = new Throw(rockbx, rockby, 8, 50, 50, "rgb(250,0,0)", "p3.png");
+    var paperb = new Throw(paperbx, paperby, 8, 50, 50, "rgb(0,200,200)", "p1.png");
+    var scib = new Throw(scissorsbx, scissorsby, 8, 50, 50, "rgb(0,0,200)", "p2.png");
+    everything.push(rockb);
+    everything.push(paperb);
+    everything.push(scib);
+
+    function init() {
+        document.f.score.value = 0;
+        ctx = document.getElementById('canvas').getContext('2d'); 
+        canvas1 = document.getElementById('canvas');
+        canvas1.addEventListener('click', choose, false);
+
+        drawall();  
+        ctx.font="bold 16pt 궁서";
+        ctx.fillStyle="blue";
+        audio = document.getElementsByTagName("audio");
+    } 
+
+    function drawall() {
+        ctx.clearRect(0, 0, 600, 400);
+        for (var i=0; i < everything.length; i++) {
+            everything[i].draw();
+        }
+    }
+    
+    window.onload = function(){
+    	init();
+    }
+</script>
+</head>
+<body>  
+<canvas id="canvas" width="600" height="400"></canvas>  
+<br/>
+<form name="f">
+    점수: <input name="score" value="0" size="3" disabled="disabled"/>
+</form>
+<audio>
+    <source src="sounds/hithard.mp3"></source>
+    <source src="sounds/hithard.ogg"></source>
+</audio>
+<audio>
+    <source src="sounds/inhale.mp3"></source>
+    <source src="sounds/inhale.ogg"></source>
+</audio>
+<audio>
+    <source src="sounds/sword.mp3"></source>
+    <source src="sounds/sword.ogg"></source>
+</audio>
+<audio>
+    <source src="sounds/crowdohh.mp3"></source>
+    <source src="sounds/crowdohh.ogg"></source>
+</audio>
+</body>
+</html>

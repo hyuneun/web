@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>함수</title>
+</head>
+<body>
+내장함수(built in function)
+<script type="text/javascript">
+	document.write("문자함수<br>")
+	var str = "javascript language"
+	document.write("<br>", str);
+	document.write("<br>", str.length);
+	document.write("<br>", str.charAt(2));
+	document.write("<br>", str.indexOf("v")); //문자검색
+	document.write("<br>", str.indexOf("V"));
+	document.write("<br>", str.substring(1, 6)); //문자일부취함
+	document.write("<br>", str.toUpperCase()); //대문자변환
+	document.write("<br>", str.toLowerCase()); //소문자변환
+
+	document.write("스타일함수<br>")
+	document.write("<br>", str.bold())
+	document.write("<br>", str.bold().fontcolor("#ff0000").fontsize(24))
+	document.write("<br>", str.big())
+	document.write("<br>", str.small())
+	document.write("<br>", str.strike())
+
+	d = new Date();
+	document.write("<br>", d, Date())
+	document.write("<br>", d.getFullYear())
+	document.write("<br>", d.getMonth())
+	document.write("<br>", d.getDate())
+	document.write("<br>", d.getDay())
+	document.write("<br>", d.getHours())
+
+	document.write("<br>")
+
+	document.write("<br>", Math.abs(-7))  //절대값
+	document.write("<br>", Math.floor(3.6))	//작은정수	
+	document.write("<br>", Math.ceil(3.6))  //큰정수
+	document.write("<br>", Math.round(3.6))	//반올림
+	document.write("<br>", Math.round(3.3))	 
+	document.write("<br>", Math.random())  //0~1 사이에 난수
+
+	document.write("<br>")
+	document.write("<br>", "10" + "5", "10" + 5)
+	document.write("<br>", eval("10") + 5, " ", Number("10") + 5) //eval 수식모양 의 문자열을 수식으로 변환
+	document.write("<br>", "10 + 5 * 2", " ", eval("10 + 5 * 2"))
+	document.write("<br>", parseInt("3.5") + 5) //문자열을 정수로 변환
+	document.write("<br>", parseFloat("3.5") + 5)//문자열을 실수로 변환
+	
+	//alert("반가워")
+	//새로운 창 열기
+	//open("js1.html", "대화창", "width=300,height=200")
+	
+	//암호화
+	var ss = encodeURI("안녕")
+	document.write("<br>", ss)
+	ss2 = decodeURI(ss)
+	document.write("<br>", ss2)
+
+</script>
+</body>
+</html>

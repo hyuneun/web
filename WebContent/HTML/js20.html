@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>사칙연산</title>
+	<script type="text/javascript">
+		function dispCalc(su1, op, su2){
+			//document.write(Number(su[0]) + su[1] + Number(su[2]))
+			if(su[1] === "+")
+			document.write(Number(su[0]) + Number(su[2]))
+			else if(su[1] === "-")
+			document.write(Number(su[0]) - Number(su[2]))
+			else if(su[1] === "*")
+			document.write(Number(su[0]) * Number(su[2]))
+			else if(su[1] === "/")
+			document.write(Number(su[0]) / Number(su[2]))
+
+		}
+
+
+	</script>
+
+</head>
+<body>
+문자열 자르기 연습(split)<br>
+<script type="text/javascript">
+	var str = "개,고양이,악어"
+	document.write(str);
+
+	document.write("<br>");
+	var arr = [];
+	arr = str.split(",")
+	document.write(arr[0] + " " + arr[1] + " " + arr[2])
+	for(i in arr){
+		document.write(arr[i] + " ")
+
+	}
+
+</script>
+<hr>
+문제 키보드로부터 두수와 연산자를 입력받아(prompt) 5 + 6
+ dispCalc 함수호출후 그 연산결과를 출력
+ <hr>
+<script type="text/javascript">
+	su = prompt("수식입력")
+	su = su.split(" ")
+	dispCalc(su)
+
+</script>
+
+</body>
+</html>

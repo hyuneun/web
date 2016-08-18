@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script type="text/javascript">
+		window.onload = function(){
+			document.getElementById('btn1').onclick = toggleMusic
+			document.getElementById('btn2').onclick = startMusic
+			document.getElementById('btn3').onclick = fastMusic
+			
+			document.getElementById('myvideo').ontimeupdate = dispTime
+		}
+		var music;
+		function toggleMusic(){
+				music = document.getElementById("mymusic")
+				if(music.paused){
+					music.play();
+					document.getElementById("btn1").innerText = "일시정지"
+				}else{
+					music.pause();
+					document.getElementById("btn1").innerText = "음악재생"
+
+				}
+		}
+
+		function startMusic(){
+			music.currentTime = 0
+		}
+		function fastMusic(){
+			music.currentTime += 2
+		}
+		
+
+		function dispTime(){
+			document.getElementById("t").innerText = this.currentTime
+
+		}
+	</script>
+</head>
+<body>
+미디어 연습 <p>
+<audio src="sounds/moon.mp3" controls="controls" id="mymusic">
+audio 지원안함
+</audio>
+
+<hr>
+
+<video src="sounds/one.mp4" controls width="500" height="400" id="myvideo">
+</video>
+<br>
+<button id="btn1">음악재생</button>
+<button id="btn2">&lt;</button>
+<button id="btn3">&gt;&gt;</button>
+<span id="t">0.0</span>초
+</body>
+</html>
